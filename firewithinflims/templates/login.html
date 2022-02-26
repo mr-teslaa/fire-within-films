@@ -1,0 +1,53 @@
+{% extends 'root.html' %}
+
+<!-- block content -->
+{% block content %}
+
+<!-- landing page  -->
+<div class="container">
+    <h1>login page</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                <!-- email -->
+                {% if form.email.errors %}
+                <!-- toggle error -->
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.email(class="form-control form-control-lg") }}
+                <!-- end email -->
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                <!-- password -->
+                {% if form.password.errors %}
+                <!-- toggle error -->
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.password(class="form-control form-control-lg") }}
+                <!-- end of password -->
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+<!-- finish -->
+{% endblock content %}
