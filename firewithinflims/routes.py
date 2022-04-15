@@ -25,9 +25,9 @@ from flask_login import login_required
 #   LANDING PAGE
 @app.route('/')
 def index():
-    if current_user.is_authenticated:
-        return redirect(url_for('admindashboard'))
-    return render_template('home.html')
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('admindashboard'))
+    return render_template('landing.html')
 
 #   ROUTE FOR ADMINS
 @app.route('/admin/dashboard', methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def index():
 @login_required
 def admindashboard():
     posts = SUPost.query.all()
-    return render_template('dashboard.html', posts=posts)
+    return render_template('dashboard.html', posts=posts, scrolltop=True)
 
 #   VIEW INDIVIDUAL POST IN A SINGLE PAGE
 @app.route("/admin/post/<int:post_id>")
@@ -97,6 +97,22 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('admindashboard'))
 
+#   CREATE ACCOUNT FOR ADMIN
+@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup/', methods=['GET', 'POST'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('admindashboard'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = SuperUser(username=form.username.data, name=form.name.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('admindashboard'))
+    return render_template('signup.html', form=form)
+
 #   LO0GIN FOR ADMINS
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/login/', methods=['GET', 'POST'])
@@ -119,6 +135,7 @@ def login():
 #   ROUTE FOR LOGOUT
 @app.route('/logout')
 @app.route('/logout/')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -175,28 +192,16 @@ def editaccount():
 #   ACCOUNT PAGE FOR ADMINS
 @app.route('/post/create', methods=['GET', 'POST'])
 @app.route('/post/create/', methods=['GET', 'POST'])
+@login_required
 def createpost():
     form=PostForm()
     if form.validate_on_submit():
-        post = SUPost(title=form.title.data,content=form.content.data, author=current_user)
+        picture_file = save_post_picture(form.picture.data)
+        post = SUPost(title=form.title.data,content=form.content.data, author=current_user, image_file=picture_file)
+        print(post)
         db.session.add(post)
         db.session.commit()
         flash('Success, your post is live now', 'success')
         return redirect(url_for('admindashboard'))
     return render_template('createpost.html', form=form)         
 
-#   CREATE ACCOUNT FOR ADMIN
-@app.route('/signup', methods=['GET', 'POST'])
-@app.route('/signup/', methods=['GET', 'POST'])
-def signup():
-    if current_user.is_authenticated:
-        return redirect(url_for('admindashboard'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = SuperUser(username=form.username.data, name=form.name.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash('Your account has been created! You are now able to log in', 'success')
-        return redirect(url_for('admindashboard'))
-    return render_template('signup.html', form=form)

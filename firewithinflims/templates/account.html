@@ -6,15 +6,14 @@
 <!-- landing page  -->
 <div class="container">
     <h1>Username: {{ current_user.username }}</h1>
-    <img 
-        src="{{ image_file }}" 
-        alt="profile-{{current_user.username}}" 
-        class="rounded-circle account-img"    
+    <img
+        src="{{ image_file }}"
+        alt="profile-{{current_user.username}}"
+        class="rounded-circle account-img"
     />
     <p>Email: {{ current_user.email }}</p>
-    <button class="btn btn-info">
-        Create a Post
-    </button>
+    <button class="btn btn-info">Create a Post</button>
 </div>
+
 <!-- finish -->
 {% endblock content %}
