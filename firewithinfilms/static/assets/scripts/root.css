@@ -363,7 +363,6 @@ body.dark-theme {
 .button__lg {
     display: block;
     padding: 1rem;
-    margin: 2rem 0;
     background-color: var(--first-color);
     color: #fff;
     font-weight: 600;

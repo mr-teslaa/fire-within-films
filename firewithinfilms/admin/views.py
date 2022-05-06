@@ -160,7 +160,6 @@ def admin_delete_post(post_id):
     return redirect(url_for('admindashboard'))    
 
 #   LO0GIN FOR ADMINS
-@admin.route('/youwillneverfind/login', methods=['GET', 'POST'])
 @admin.route('/youwillneverfind/login/', methods=['GET', 'POST'])
 def admin_login():
     if current_user.is_authenticated:

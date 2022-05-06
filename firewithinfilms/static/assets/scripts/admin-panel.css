@@ -153,7 +153,6 @@ button {
 .nav__icon {
     font-size: 1.5rem;
 }
-
 /*=============== MEDIA QUERIES ===============*/
 /* For small devices */
 /* Remove if you choose, the minimalist design */
@@ -174,7 +173,7 @@ button {
 @media screen and (min-width: 767px) {
     .nav__menu {
         height: 100%;
-        width: 175px;
+        width: 275px;
     }
 
     .nav__list {

@@ -1,7 +1,7 @@
 {% extends 'root-dashboard.html' %}
 
 {% block head %} 
-<link rel="stylesheet" href="{{ url_for('static', filename='scripts/admin-panel.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/scripts/reuse.css') }}">
 {% endblock %}
 
 
@@ -48,7 +48,14 @@
         </ul>
     </div>
 
-
+    <div class="section flex flex-j-start flex-a-center p-5">
+        <img 
+            src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
+            alt="{{current_user.name}} - FireWithinFilms"
+            class="img__round-sm mx-1"    
+        /> 
+        <h2 class="h2-sm">Home</h2>
+    </div>
     
     <!-- post list -->
     {% if posts %}

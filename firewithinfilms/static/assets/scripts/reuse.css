@@ -1,0 +1,282 @@
+/*=============== VARIABLES CSS ===============*/
+:root {
+    --header-height: 3rem;
+    /*========== Colors ==========*/
+    --hue: 45;
+    --sat: 98%;
+    --first-color: hsl(var(--hue), var(--sat), 60%);
+    --first-color-light: hsl(var(--hue), var(--sat), 85%);
+    --first-color-lighten: hsl(var(--hue), var(--sat), 80%);
+    --first-color-alt: hsl(var(--hue), var(--sat), 53%);
+    --title-color: hsl(var(--hue), 4%, 15%);
+    --text-color: hsl(var(--hue), 4%, 35%);
+    --text-color-light: hsl(var(--hue), 4%, 65%);
+    --body-color: hsl(var(--hue), 0%, 100%);
+    --container-color: #fff;
+    --scroll-bar-color: hsl(var(--hue), 4%, 85%);
+    --scroll-thumb-color: hsl(var(--hue), 4%, 75%);
+    /*========== Font and typography ==========*/
+    --body-font: "Poppins", sans-serif;
+    --biggest-font-size: 2.25rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+    /*========== Font weight ==========*/
+    --font-semi-bold: 600;
+    --font-bold: 700;
+    --font-normal: 500;
+    /*========== img ==========*/
+    --img-transition: 0.3s;
+    --img-hidden: hidden;
+    --img-scale: scale(1.1);
+    /*========== Margenes ==========*/
+    --mb-0-5: 0.5rem;
+    --mb-0-75: 0.75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+
+@media screen and (min-width: 968px) {
+    :root {
+        --biggest-font-size: 4rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: 0.875rem;
+        --smaller-font-size: 0.813rem;
+    }
+}
+
+/* margins */
+.m-75 {
+    margin: var(--mb-0-75);
+}
+
+.mt-75 {
+    margin-top: var(--mb-0-75);
+}
+
+.mb-75 {
+    margin-bottom: var(--mb-0-75);
+}
+
+.mx-75 {
+    margin-right: var(--mb-0-75);
+}
+
+.my-75 {
+    margin-top: var(--mb-0-75);
+}
+
+.mxy-75 {
+    margin-top: var(--mb-0-75);
+    margin-bottom: var(--mb-0-75);
+}
+
+.m-5 {
+    margin: var(--mb-0-5);
+}
+
+.mt-5 {
+    margin-top: var(--mb-0-5);
+}
+
+.mb-5 {
+    margin-bottom: var(--mb-0-5);
+}
+
+.mx-5 {
+    margin-right: var(--mb-0-5);
+}
+
+.my-5 {
+    margin-top: var(--mb-0-5);
+}
+
+.mxy-5 {
+    margin-top: var(--mb-0-5);
+    margin-bottom: var(--mb-0-5);
+}
+
+.m-1 {
+    margin: var(--mb-1);
+}
+
+.mt-1 {
+    margin-top: var(--mb-1);
+}
+
+.mb-1 {
+    margin-bottom: var(--mb-1);
+}
+
+.mx-1 {
+    margin-right: var(--mb-1);
+}
+
+.my-1 {
+    margin-top: var(--mb-1);
+}
+
+.mxy-1 {
+    margin-top: var(--mb-1);
+    margin-bottom: var(--mb-1);
+}
+
+.m-2 {
+    margin: var(--mb-2);
+}
+
+.mt-2 {
+    margin-top: var(--mb-2);
+}
+
+.mb-2 {
+    margin-bottom: var(--mb-2);
+}
+
+.mx-2 {
+    margin-right: var(--mb-2);
+}
+
+.my-2 {
+    margin-top: var(--mb-2);
+}
+
+.mxy-2 {
+    margin-top: var(--mb-2);
+    margin-bottom: var(--mb-2);
+}
+
+/* paddings */
+.p-75 {
+    margin: var(--mb-0-75);
+}
+
+.pt-75 {
+    margin-top: var(--mb-0-75);
+}
+
+.pb-75 {
+    margin-bottom: var(--mb-0-75);
+}
+
+.px-75 {
+    margin-right: var(--mb-0-75);
+}
+
+.py-75 {
+    margin-top: var(--mb-0-75);
+}
+
+.pxy-75 {
+    margin-top: var(--mb-0-75);
+    margin-bottom: var(--mb-0-75);
+}
+
+.p-5 {
+    margin: var(--mb-0-5);
+}
+
+.pt-5 {
+    margin-top: var(--mb-0-5);
+}
+
+.pb-5 {
+    margin-bottom: var(--mb-0-5);
+}
+
+.px-5 {
+    margin-right: var(--mb-0-5);
+}
+
+.py-5 {
+    margin-top: var(--mb-0-5);
+}
+
+.pxy-5 {
+    margin-top: var(--mb-0-5);
+    margin-bottom: var(--mb-0-5);
+}
+
+.p-1 {
+    margin: var(--mb-1);
+}
+
+.pt-1 {
+    margin-top: var(--mb-1);
+}
+
+.pb-1 {
+    margin-bottom: var(--mb-1);
+}
+
+.px-1 {
+    margin-right: var(--mb-1);
+}
+
+.py-1 {
+    margin-top: var(--mb-1);
+}
+
+.pxy-1 {
+    margin-top: var(--mb-1);
+    margin-bottom: var(--mb-1);
+}
+
+.p-2 {
+    margin: var(--mb-2);
+}
+
+.pt-2 {
+    margin-top: var(--mb-2);
+}
+
+.pb-2 {
+    margin-bottom: var(--mb-2);
+}
+
+.px-2 {
+    margin-right: var(--mb-2);
+}
+
+.py-2 {
+    margin-top: var(--mb-2);
+}
+
+.pxy-2 {
+    margin-top: var(--mb-2);
+    margin-bottom: var(--mb-2);
+}
+
+/*=============== LAYOUT ===============*/
+.flex {
+    display: flex;
+}
+
+.flex-j-start {
+    justify-content: flex-start;
+}
+
+.flex-a-center {
+    align-items: center;
+}
+
+/*=============== REUSABLE CLASS ===============*/
+.h2-sm {
+    font-size: 1.2rem;
+}
+
+.img__round-sm {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
