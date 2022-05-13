@@ -163,7 +163,7 @@ def admin_delete_post(post_id):
 @admin.route('/youwillneverfind/login/', methods=['GET', 'POST'])
 def admin_login():
     if current_user.is_authenticated:
-        return redirect(url_for('admindashboard'))
+        return redirect(url_for('admin.admin_dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = SuperUser.query.filter_by(email=form.email.data).first()
@@ -171,7 +171,7 @@ def admin_login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             flash('Login success', 'success')
-            return redirect(next_page) if next_page else redirect(url_for('admindashboard'))
+            return redirect(next_page) if next_page else redirect(url_for('admin.admindashboard'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('admin/login.html', form=form)

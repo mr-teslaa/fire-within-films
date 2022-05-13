@@ -129,9 +129,9 @@ class UpdateAccountForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
+    content = TextAreaField('What is happening?', validators=[DataRequired()])
     picture = FileField(
-        'Add an image', 
+        'Add a banner image', 
         validators = [
             FileAllowed(['jpg', 'jpeg', 'png'])
         ]

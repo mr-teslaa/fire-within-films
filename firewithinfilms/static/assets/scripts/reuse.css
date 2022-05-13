@@ -72,6 +72,10 @@
     margin-right: var(--mb-0-75);
 }
 
+.ml-75 {
+    margin-left: var(--mb-0-75);
+}
+
 .my-75 {
     margin-top: var(--mb-0-75);
 }
@@ -95,6 +99,10 @@
 
 .mx-5 {
     margin-right: var(--mb-0-5);
+}
+
+.ml-5 {
+    margin-left: var(--mb-0-5);
 }
 
 .my-5 {
@@ -122,6 +130,10 @@
     margin-right: var(--mb-1);
 }
 
+.ml-1 {
+    margin-left: var(--mb-1);
+}
+
 .my-1 {
     margin-top: var(--mb-1);
 }
@@ -147,6 +159,10 @@
     margin-right: var(--mb-2);
 }
 
+.mx-2 {
+    margin-left: var(--mb-2);
+}
+
 .my-2 {
     margin-top: var(--mb-2);
 }
@@ -158,106 +174,133 @@
 
 /* paddings */
 .p-75 {
-    margin: var(--mb-0-75);
+    padding: var(--mb-0-75);
 }
 
 .pt-75 {
-    margin-top: var(--mb-0-75);
+    padding-top: var(--mb-0-75);
 }
 
 .pb-75 {
-    margin-bottom: var(--mb-0-75);
+    padding-bottom: var(--mb-0-75);
 }
 
 .px-75 {
-    margin-right: var(--mb-0-75);
+    padding-right: var(--mb-0-75);
+}
+
+.pl-75 {
+    padding-left: var(--mb-0-75);
 }
 
 .py-75 {
-    margin-top: var(--mb-0-75);
+    padding-top: var(--mb-0-75);
 }
 
 .pxy-75 {
-    margin-top: var(--mb-0-75);
-    margin-bottom: var(--mb-0-75);
+    padding-top: var(--mb-0-75);
+    padding-bottom: var(--mb-0-75);
 }
 
 .p-5 {
-    margin: var(--mb-0-5);
+    padding: var(--mb-0-5);
 }
 
 .pt-5 {
-    margin-top: var(--mb-0-5);
+    padding-top: var(--mb-0-5);
 }
 
 .pb-5 {
-    margin-bottom: var(--mb-0-5);
+    padding-bottom: var(--mb-0-5);
 }
 
 .px-5 {
-    margin-right: var(--mb-0-5);
+    padding-right: var(--mb-0-5);
+}
+
+.pl-5 {
+    padding-left: var(--mb-0-5);
 }
 
 .py-5 {
-    margin-top: var(--mb-0-5);
+    padding-top: var(--mb-0-5);
 }
 
 .pxy-5 {
-    margin-top: var(--mb-0-5);
-    margin-bottom: var(--mb-0-5);
+    padding-top: var(--mb-0-5);
+    padding-bottom: var(--mb-0-5);
 }
 
 .p-1 {
-    margin: var(--mb-1);
+    padding: var(--mb-1);
 }
 
 .pt-1 {
-    margin-top: var(--mb-1);
+    padding-top: var(--mb-1);
 }
 
 .pb-1 {
-    margin-bottom: var(--mb-1);
+    padding-bottom: var(--mb-1);
 }
 
 .px-1 {
-    margin-right: var(--mb-1);
+    padding-right: var(--mb-1);
+}
+
+.pl-1 {
+    padding-ldft: var(--mb-1);
 }
 
 .py-1 {
-    margin-top: var(--mb-1);
+    padding-top: var(--mb-1);
 }
 
 .pxy-1 {
-    margin-top: var(--mb-1);
-    margin-bottom: var(--mb-1);
+    padding-top: var(--mb-1);
+    padding-bottom: var(--mb-1);
 }
 
 .p-2 {
-    margin: var(--mb-2);
+    padding: var(--mb-2);
 }
 
 .pt-2 {
-    margin-top: var(--mb-2);
+    padding-top: var(--mb-2);
 }
 
 .pb-2 {
-    margin-bottom: var(--mb-2);
+    padding-bottom: var(--mb-2);
 }
 
 .px-2 {
-    margin-right: var(--mb-2);
+    padding-right: var(--mb-2);
+}
+
+.pl-2 {
+    padding-left: var(--mb-2);
 }
 
 .py-2 {
-    margin-top: var(--mb-2);
+    padding-top: var(--mb-2);
 }
 
 .pxy-2 {
-    margin-top: var(--mb-2);
-    margin-bottom: var(--mb-2);
+    padding-top: var(--mb-2);
+    padding-bottom: var(--mb-2);
 }
 
 /*=============== LAYOUT ===============*/
+.container {
+    max-width: 968px;
+    margin-left: var(--mb-1-5);
+    margin-right: var(--mb-1-5);
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
 .flex {
     display: flex;
 }
@@ -266,11 +309,95 @@
     justify-content: flex-start;
 }
 
+.flex-j-space-between {
+    justify-content: space-between;
+}
+
 .flex-a-center {
     align-items: center;
 }
 
 /*=============== REUSABLE CLASS ===============*/
+.bg__primary {
+    /* background-color: var(--first-color-lighten); */
+    background-color: #f4f6fe;
+}
+
+.bg__primary-alt {
+    background-color: var(--first-color-lighten);
+}
+
+.section {
+    padding: 4.5rem 0 1rem;
+}
+
+.section__title {
+    font-size: var(--h1-font-size);
+    color: var(--title-color);
+    margin-bottom: var(--mb-0-5);
+    text-align: center;
+}
+
+.section__subtitle {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-normal);
+    margin-bottom: var(--mb-1);
+}
+
+.center__center {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+/* text - reusable */
+.text__dark {
+    color: var(--first-color-dark);
+}
+
+.text__small-bold {
+    font-weight: 600;
+    font-size: var(--small-font-size);
+}
+
+.text__center {
+    text-align: center !important;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.text-bold-lg {
+    font-weight: 800;
+}
+
+.text-bold-xlg {
+    font-weight: 900;
+}
+
+.bold {
+    font-weight: 600;
+}
+/* link - reuse */
+.link {
+    cursor: pointer;
+    color: #000;
+}
+
+.svg__color {
+    fill: var(--first-color);
+}
+
+.svg__blob {
+    fill: var(--first-color-light);
+}
+
+.svg__img {
+    width: 300px;
+    justify-self: center;
+}
 .h2-sm {
     font-size: 1.2rem;
 }
@@ -279,4 +406,86 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
+}
+
+/*=============== BUTTONS ===============*/
+.button {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: #1a1a1a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 3rem;
+    font-weight: var(--font-semi-bold);
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: var(--first-color-alt);
+}
+
+.button__lg {
+    display: block;
+    padding: 1rem;
+    background-color: var(--first-color);
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+}
+
+.button__lg:hover {
+    background-color: var(--title-color);
+    color: var(--first-color);
+    cursor: pointer;
+}
+
+.button__outline {
+    color: var(--title-color);
+    background-color: transparent;
+    border: 2px solid var(--first-color);
+}
+
+.button__header {
+    display: none;
+}
+
+.button-link {
+    background: none;
+    padding: 0;
+    color: var(--title-color);
+}
+
+.button-link:hover {
+    background-color: transparent;
+}
+
+.button-flex {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 0.25rem;
+    padding: 0.75rem 1rem;
+}
+
+.button__icon {
+    font-size: 1.5rem;
+}
+
+.button__sm {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+/* shadow */
+.shadow__primary {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+@media screen and (min-width: 1024px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

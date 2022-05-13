@@ -101,11 +101,11 @@
 
 .login__box {
     display: grid;
-    grid-template-columns: max-content 1fr;
+    /* grid-template-columns: max-content 1fr; */
     column-gap: 0.5rem;
     padding: 1.125rem 1rem;
     background-color: #fff;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     border-radius: 0.5rem;
 }
 
@@ -124,6 +124,10 @@
     font-size: var(--normal-font-size);
     font-weight: 700;
     color: var(--first-color-dark);
+}
+
+.login__box-lighter .login__input {
+    font-weight: lighter;
 }
 
 .login__input::placeholder {

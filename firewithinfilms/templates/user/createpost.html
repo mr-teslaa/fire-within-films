@@ -1,54 +1,94 @@
-{% extends 'root.html' %}
+{% extends 'root-dashboard.html' %}
+
+{% block head %} 
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
+/>
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <h1>Create Post</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{ legend }}</legend>
-            <div class="form-group">
-                {{ form.title.label(class="form-control-label") }}
-                {% if form.title.errors %}
-                    {{ form.title(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.title.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.title(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.content.label(class="form-control-label") }}
-                {% if form.content.errors %}
-                    {{ form.content(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.content.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.content(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.picture.label(class="form-control-label") }}
-                {% if form.picture.errors %}
-                    {{ form.picture(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.picture.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.picture(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
+<form method="POST" action="" enctype="multipart/form-data">
+    <div class="shadow__primary">
+        <div class="container flex flex-j-space-between flex-a-center p-5 header__dashboard">
+            <i class='bx bx-left-arrow-alt h2-sm' style="font-weight: 800"></i>
+            <span>
+                {{ form.submit(class="button button__sm submit__button")}}
+            </span>
         </div>
-    </form>
-</div>
+    </div>
+        
+    <div class="container bg__primary-alt admin__panel-form-container my-1">
+        <div class="flex flex-j-start flex-a-center p-5">
+            <img 
+                src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
+                alt="{{current_user.name}} - FireWithinFilms"
+                class="img__round-sm mx-1"    
+            /> 
+            <h2 class="h2-sm">Create Post</h2>
+        </div>
+
+    
+        {{ form.hidden_tag() }}
+
+        <!-- post title -->
+        {{ form.title.label(class="ml-5 text-bold") }}
+        {% if form.title.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.title( class="login__input login__input-error",placeholder="Post Title" )}}
+                </div>
+                {% for error in form.title.errors %}
+                    <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">    
+                {{ form.title(class="login__input", placeholder="Post Title") }}
+            </div>
+        {% endif %}
+        
+
+        <!-- post content -->
+        {{ form.content.label(class="ml-5 text-bold") }}
+        {% if form.content.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.content( class="login__input login__details login__input-error",placeholder="Write your thoughts..." )}}
+                </div>
+                {% for error in form.content.errors %}
+                    <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">         
+                {{ form.content(
+                    class="login__input login__details", 
+                    placeholder="Write your thoughts..."
+                ) }}
+            </div>
+        {% endif %}
+
+        
+        <!-- post banner -->
+        {{ form.picture.label(class="ml-5 text-bold") }}
+        {% if form.picture.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.picture( class="login__input login__input-error",placeholder="Add banner image" )}}
+                </div>
+                {% for error in form.picture.errors %}
+                    <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">               
+                {{ form.picture(class="login__input", placeholder="Add banner image") }}
+            </div>
+        {% endif %}
+        <!-- <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div> -->
+    </div>
+ </form>
 {% endblock content %}

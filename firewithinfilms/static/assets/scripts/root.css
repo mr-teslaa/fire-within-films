@@ -143,72 +143,6 @@ body.dark-theme {
     background-color: var(--container-color);
 }
 
-/*=============== REUSABLE CSS CLASSES ===============*/
-.bg__primary {
-    /* background-color: var(--first-color-lighten); */
-    background-color: #f4f6fe;
-}
-
-.section {
-    padding: 4.5rem 0 1rem;
-}
-
-.section__title {
-    font-size: var(--h1-font-size);
-    color: var(--title-color);
-    margin-bottom: var(--mb-0-5);
-    text-align: center;
-}
-
-.section__subtitle {
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-normal);
-    margin-bottom: var(--mb-1);
-}
-
-.center__center {
-    height: 100vh;
-    width: 100%;
-    display: grid;
-    place-items: center;
-}
-
-/* text - reusable */
-.text__dark {
-    color: var(--first-color-dark);
-}
-
-.text__small-bold {
-    font-weight: 600;
-    font-size: var(--small-font-size);
-}
-
-.text__center {
-    text-align: center !important;
-}
-
-.bold {
-    font-weight: 600;
-}
-/* link - reuse */
-.link {
-    cursor: pointer;
-    color: #000;
-}
-
-.svg__color {
-    fill: var(--first-color);
-}
-
-.svg__blob {
-    fill: var(--first-color-light);
-}
-
-.svg__img {
-    width: 300px;
-    justify-self: center;
-}
-
 /*=============== LAYOUT ===============*/
 .container {
     max-width: 968px;
@@ -345,69 +279,7 @@ body.dark-theme {
     border-radius: 1rem;
 }
 
-/*=============== BUTTONS ===============*/
-.button {
-    display: inline-block;
-    background-color: var(--first-color);
-    color: #1a1a1a;
-    padding: 0.75rem 1.5rem;
-    border-radius: 3rem;
-    font-weight: var(--font-semi-bold);
-    transition: 0.3s;
-}
-
-.button:hover {
-    background-color: var(--first-color-alt);
-}
-
-.button__lg {
-    display: block;
-    padding: 1rem;
-    background-color: var(--first-color);
-    color: #fff;
-    font-weight: 600;
-    text-align: center;
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
-    transition: 0.3s;
-}
-
-.button__lg:hover {
-    background-color: var(--title-color);
-    color: var(--first-color);
-    cursor: pointer;
-}
-
-.button__outline {
-    color: var(--title-color);
-    background-color: transparent;
-    border: 2px solid var(--first-color);
-}
-
-.button__header {
-    display: none;
-}
-
-.button-link {
-    background: none;
-    padding: 0;
-    color: var(--title-color);
-}
-
-.button-link:hover {
-    background-color: transparent;
-}
-
-.button-flex {
-    display: inline-flex;
-    align-items: center;
-    column-gap: 0.25rem;
-    padding: 0.75rem 1rem;
-}
-
-.button__icon {
-    font-size: 1.5rem;
-}
+/* button => reuse.css */
 
 /*=============== ABOUT ===============*/
 .about__container {

@@ -29,19 +29,8 @@ from flask_login import current_user
 from flask_login import logout_user
 from flask_login import login_required
 
-#   SAVE USER PROFILE PICTURES
-def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
-
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-
-    return picture_fn
+from firewithinfilms.save_image import save_post_picture
+from firewithinfilms.save_image import save_profile_picture
 
 
 user = Blueprint('user', __name__)
@@ -71,7 +60,7 @@ def user_account():
 #     form = UpdateAccountForm()
 #     if form.validate_on_submit():
 #         if form.picture.data:
-#             picture_file = save_picture(form.picture.data)
+#             picture_file = save_profile_picture(form.picture.data)
 #             current_user.image_file = picture_file
 #             flash('Successfully uploaded image', 'info')
 #         else:
@@ -85,52 +74,39 @@ def user_account():
 #         form.username.data = current_user.username
 #         form.email.data = current_user.email
 #     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-#     return render_template('admin/editaccount.html', title='Account', image_file=image_file, form=form)  
+#     return render_template('user/editaccount.html', title='Account', image_file=image_file, form=form)  
 
 # #   VIEW INDIVIDUAL POST IN A SINGLE PAGE
-# @user.route("/user/post/<int:post_id>")
-# @user.route("/admin/post/<int:post_id>/")
-# def adminpost(post_id):
+# @user.route("/user/post/<int:post_id>/")
+# def user_post(post_id):
 #     post = SUPost.query.get_or_404(post_id)
 #     image_file = url_for('static', filename='pictures/' + post.image_file)
-#     return render_template('admin/post.html', title=post.title, post=post, image_file=image_file)
+#     return render_template('user/post.html', title=post.title, post=post, image_file=image_file)
 
-# #   SAVE POST PICTURES
-# def save_post_picture(form_picture):
-#     random_hex = secrets.token_hex(8)
-#     _, f_ext = os.path.splitext(form_picture.filename)
-#     picture_fn = random_hex + f_ext
-#     picture_path = os.path.join(current_app.root_path, 'static/pictures', picture_fn)
 
-#     output_size = (500, 300)
-#     i = Image.open(form_picture)
-#     i.thumbnail(output_size)
-#     i.save(picture_path)
-
-#     return picture_fn
-
-# #   ACCOUNT PAGE FOR ADMINS
-# @user.route('/admin/post/create', methods=['GET', 'POST'])
-# @user.route('/admin/post/create/', methods=['GET', 'POST'])
-# @login_required
-# def admin_create_post():
-#     form=PostForm()
-#     if form.validate_on_submit():
-#         picture_file = save_post_picture(form.picture.data)
-#         post = SUPost(title=form.title.data,content=form.content.data, author=current_user, image_file=picture_file)
-#         print(post)
-#         db.session.add(post)
-#         db.session.commit()
-#         flash('Success, your post is live now', 'success')
-#         return redirect(url_for('admindashboard'))
-#     return render_template('admin/createpost.html', form=form)   
+#   CREATE POST
+@user.route('/post/create/', methods=['GET', 'POST'])
+@login_required
+def user_create_post():
+    form=PostForm()
+    if form.validate_on_submit():
+        picture_file = save_post_picture(form.picture.data)
+        post = UserPost(title=form.title.data,content=form.content.data, author=current_user, image_file=picture_file)
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(post)
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        db.session.add(post)
+        db.session.commit()
+        flash('Success, your post is live now', 'success')
+        return redirect(url_for('user.user_dashboard'))
+    return render_template('user/createpost.html', form=form)   
 
 
 # #   UPDATE A POST 
-# @user.route("/admin/post/<int:post_id>/update", methods=['GET', 'POST'])
-# @user.route("/admin/post/<int:post_id>/update/", methods=['GET', 'POST'])
+# @user.route("/user/post/<int:post_id>/update", methods=['GET', 'POST'])
+# @user.route("/user/post/<int:post_id>/update/", methods=['GET', 'POST'])
 # @login_required
-# def admin_update_post(post_id):
+# def user_update_post(post_id):
 #     post = SUPost.query.get_or_404(post_id)
 #     if post.author != current_user:
 #         abort(403)
