@@ -10,11 +10,13 @@
 {% block content %}
 <form method="POST" action="" enctype="multipart/form-data">
     <div class="shadow__primary">
-        <div class="container flex flex-j-space-between flex-a-center p-5 header__dashboard">
-            <i class='bx bx-left-arrow-alt h2-sm' style="font-weight: 800"></i>
-            <span>
-                {{ form.submit(class="button button__sm submit__button")}}
-            </span>
+        <div class="container">
+            <div class="header-sm flex flex-j-space-between flex-a-center p-5">
+                <i class='bx bx-left-arrow-alt h2-sm' style="font-weight: 800"></i>
+                <span>
+                    {{ form.submit(class="button button__sm submit__button")}}
+                </span>
+            </div>
         </div>
     </div>
         

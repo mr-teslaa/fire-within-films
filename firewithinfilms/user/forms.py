@@ -81,11 +81,29 @@ class LoginForm(FlaskForm):
     
 
 class UpdateAccountForm(FlaskForm):
+    name = StringField(
+        'Name',
+        validators = [ 
+            Length(min=2, max=50)
+        ]
+    )
+
     username = StringField(
         'Username',
         validators = [ 
             Length(min=2, max=20)
         ]
+    )
+
+    profile_title = StringField(
+        'Profile Title',
+        validators = [ 
+            Length(min=5, max=50)
+        ]
+    )
+
+    country = StringField(
+        'Country'
     )
 
     email = StringField(
@@ -100,6 +118,21 @@ class UpdateAccountForm(FlaskForm):
         validators = [
             FileAllowed(['jpg','jpeg','png'])
         ]
+    )
+
+    profile_description = StringField(
+        'Profile Description',
+        validators = [
+            Length(min=50, max=500)
+        ]
+    )
+
+    primary_lang = StringField(
+        'Primary Laguage'
+    )
+
+    secondery_lang = StringField(
+        'Secondary Laguage'
     )
 
     password = PasswordField(

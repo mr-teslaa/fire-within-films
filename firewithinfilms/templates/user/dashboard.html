@@ -6,91 +6,111 @@
 
 
 {% block content %}
-<div class="container">
+<main style="margin-bottom: 5rem;">
     <!-- <h1>Welcome back {{current_user.username}}</h1> -->
     
-    <div class="nav__menu">
-        <ul class="nav__list">
-            <li class="nav__item">
-                <a href="#home" class="nav__link">
-                    <i class="bx bx-home-alt nav__icon"></i>
-                    <span class="nav__name">Home</span>
-                </a>
-            </li>
-            
-            <li class="nav__item">
-                <a href="#about" class="nav__link">
-                    <i class="bx bx-user nav__icon"></i>
-                    <span class="nav__name">About</span>
-                </a>
-            </li>
+    <div class="container px-75 pl-75">
+        <nav class="nav__menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="#home" class="nav__link">
+                        <i class="bx bx-home-alt nav__icon"></i>
+                        <span class="nav__name">Home</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item">
+                    <a href="#about" class="nav__link">
+                        <i class="bx bx-user nav__icon"></i>
+                        <span class="nav__name">About</span>
+                    </a>
+                </li>
 
-            <li class="nav__item">
-                <a href="#skills" class="nav__link">
-                    <i class="bx bx-book-alt nav__icon"></i>
-                    <span class="nav__name">Skills</span>
-                </a>
-            </li>
+                <li class="nav__item">
+                    <a href="#skills" class="nav__link">
+                        <i class="bx bx-book-alt nav__icon"></i>
+                        <span class="nav__name">Skills</span>
+                    </a>
+                </li>
 
-            <li class="nav__item">
-                <a href="#portfolio" class="nav__link">
-                    <i class="bx bx-briefcase-alt nav__icon"></i>
-                    <span class="nav__name">Portfolio</span>
-                </a>
-            </li>
+                <li class="nav__item">
+                    <a href="#portfolio" class="nav__link">
+                        <i class="bx bx-briefcase-alt nav__icon"></i>
+                        <span class="nav__name">Portfolio</span>
+                    </a>
+                </li>
 
-            <li class="nav__item">
-                <a href="#contactme" class="nav__link active-link">
-                    <i class="bx bx-message-square-detail nav__icon"></i>
-                    <span class="nav__name">Contactme</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+                <li class="nav__item">
+                    <a href="#contactme" class="nav__link active-link">
+                        <i class="bx bx-message-square-detail nav__icon"></i>
+                        <span class="nav__name">Contactme</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+   
 
-    <div class="section flex flex-j-start flex-a-center p-5">
-        <img 
-            src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
-            alt="{{current_user.name}} - FireWithinFilms"
-            class="img__round-sm mx-1"    
-        /> 
-        <h2 class="h2-sm">Home</h2>
-    </div>
+        <div class="section header-sm flex flex-j-space-between flex-a-center p-5">
+            <div class="flex flex-j-start flex-a-center">
+                <img 
+                src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
+                alt="{{current_user.name}} - FireWithinFilms"
+                class="img__round-sm mx-1"    
+            /> 
+            <h2 class="h2-sm">Home</h2>
+            </div>
+
+            <div>
+                <a href="{{ url_for('user.user_create_post') }}">
+                    <i class='bx bxs-edit-alt h2-sm button'></i>
+                </a>
+            </div>
+        </div>
+
+     </div>
     
     <!-- post list -->
     {% if posts %}
-    <h1>All Posts</h1>
+    <h1 class="text__lighter h2-sm ml-75">Recent Posts</h1>
     {% for post in posts %}
-        <article class="media content-section">
-            <img 
-                class="rounded-circle article-img" 
-                src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
-                height="125"
-                width="125"    
-            />
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ post.author.username }}</a>
-                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                </div>
+        <article class="media content-section my-1 mx-5 ml-5 px-75 pl-75">
+            <div class="container article__header flex pt-5">
                 <img 
+                    class="img__round-sm"
+                    src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" 
+                />
+
+                <div class="article-metadata pl-1">
+                    <a class="h3-sm mr-2 d-block" href="#">{{ post.author.username }}</a>
+                    <small class="d-block">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
+                </div>
+            </div>
+           
+            <div class="container media-body pt-5 pb-5">
+                
+                <!-- <img 
                     class="rounded-circle article-img" 
                     src="{{ url_for('static', filename='pictures/' + post.image_file) }}"
                     height="125"
                     width="125"    
-                />
-                <h2>
-                    <a class="article-title" href="#">
-                        {{ post.title }}
+                /> -->
+                <div class="article__container">
+                    <a href="#">
+                        <h2>
+                            <a class="article__title" href="#"> {{ post.title }} </a>
+                        </h2>
+
+                        <p class="article-content">{{ post.content | truncate(100) }}</p>
                     </a>
-                </h2>
-                <p class="article-content">{{ post.content }}</p>
+                </div>
+
+                
             </div>
         </article>
     {% endfor %}
     {% else %}
     <h1>No post created yet</h1>
     {% endif %}
-</div>
+</main>
 <!-- finish -->
 {% endblock content %}

@@ -36,7 +36,6 @@ from firewithinfilms.save_image import save_profile_picture
 user = Blueprint('user', __name__)
 
 #   DASHBOARD FOR USER
-@user.route('/user/dashboard', methods=['GET', 'POST'])
 @user.route('/user/dashboard/', methods=['GET', 'POST'])
 @login_required
 def user_dashboard():
@@ -44,7 +43,6 @@ def user_dashboard():
     return render_template('user/dashboard.html', posts=posts)
 
 #   ACCOUNT PAGE FOR USERS
-@user.route('/user/account', methods=['GET', 'POST'])
 @user.route('/user/account/', methods=['GET', 'POST'])
 @login_required
 def user_account():
@@ -53,28 +51,27 @@ def user_account():
 
 
 #   ACCOUNT PAGE FOR ADMINS
-# @user.route('/user/account/edit', methods=['GET', 'POST'])
-# @user.route('/user/account/edit/', methods=['GET', 'POST'])
-# @login_required
-# def user_edit_account():
-#     form = UpdateAccountForm()
-#     if form.validate_on_submit():
-#         if form.picture.data:
-#             picture_file = save_profile_picture(form.picture.data)
-#             current_user.image_file = picture_file
-#             flash('Successfully uploaded image', 'info')
-#         else:
-#             flash('NO image here', 'danger')
-#         current_user.username = form.username.data
-#         current_user.email = form.email.data
-#         db.session.commit()
-#         flash('Your account has been updated!', 'success')
-#         return redirect(url_for('account'))
-#     elif request.method == 'GET':
-#         form.username.data = current_user.username
-#         form.email.data = current_user.email
-#     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-#     return render_template('user/editaccount.html', title='Account', image_file=image_file, form=form)  
+@user.route('/user/account/edit/', methods=['GET', 'POST'])
+@login_required
+def user_edit_account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_profile_picture(form.picture.data)
+            current_user.image_file = picture_file
+            flash('Successfully uploaded image', 'info')
+        else:
+            flash('NO image here', 'danger')
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    return render_template('user/editaccount.html', title='Account', image_file=image_file, form=form)  
 
 # #   VIEW INDIVIDUAL POST IN A SINGLE PAGE
 # @user.route("/user/post/<int:post_id>/")
@@ -92,9 +89,6 @@ def user_create_post():
     if form.validate_on_submit():
         picture_file = save_post_picture(form.picture.data)
         post = UserPost(title=form.title.data,content=form.content.data, author=current_user, image_file=picture_file)
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(post)
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         db.session.add(post)
         db.session.commit()
         flash('Success, your post is live now', 'success')
@@ -103,7 +97,6 @@ def user_create_post():
 
 
 # #   UPDATE A POST 
-# @user.route("/user/post/<int:post_id>/update", methods=['GET', 'POST'])
 # @user.route("/user/post/<int:post_id>/update/", methods=['GET', 'POST'])
 # @login_required
 # def user_update_post(post_id):
@@ -128,7 +121,6 @@ def user_create_post():
 
 
 # #   DELETE A POST
-# @user.route("/admin/post/<int:post_id>/delete", methods=['POST'])
 # @user.route("/admin/post/<int:post_id>/delete/", methods=['POST'])
 # @login_required
 # def admin_delete_post(post_id):
@@ -141,7 +133,6 @@ def user_create_post():
 #     return redirect(url_for('admindashboard'))    
 
 #   CREATE ACCOUNT FOR USER
-@user.route('/signup', methods=['GET', 'POST'])
 @user.route('/signup/', methods=['GET', 'POST'])
 def user_signup():
     if current_user.is_authenticated:
@@ -159,7 +150,6 @@ def user_signup():
 
 
 #   LO0GIN FOR USER
-@user.route('/login', methods=['GET', 'POST'])
 @user.route('/login/', methods=['GET', 'POST'])
 def user_login():
     if current_user.is_authenticated:
@@ -178,7 +168,6 @@ def user_login():
 
 
 #   LOGOUT FOR USER
-@user.route("/logout")
 @user.route("/logout/")
 @login_required
 def user_logout():

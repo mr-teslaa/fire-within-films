@@ -23,7 +23,7 @@
             <!-- email -->
             {% if form.email.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.email( class="login__input login__input-error",placeholder="E-mail" )}}
                 </div>
@@ -32,7 +32,7 @@
                 {% endfor %}
             </div>
             {% else %}
-            <div class="login__box">
+            <div class="login__box login__box-icon-container">
                 <i class="bx bx-user login__icon"></i>                
                 {{ form.email(class="login__input", placeholder="E-mail") }}
             </div>
@@ -41,7 +41,7 @@
             <!-- password -->
             {% if form.password.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.password( class="login__input login__input-error",placeholder="Password" )}}
                 </div>
@@ -50,7 +50,7 @@
                 {% endfor %}
             </div>
             {% else %}
-            <div class="login__box">
+            <div class="login__box login__box-icon-container">
                 <i class="bx bx-user login__icon"></i>                
                 {{ form.password(class="login__input", placeholder="Password") }}
             </div>

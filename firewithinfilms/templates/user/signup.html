@@ -23,7 +23,7 @@
             <!-- email -->
             {% if form.email.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.email( class="login__input",placeholder="E-mail" )}}
                 </div>
@@ -42,7 +42,7 @@
             <!-- username -->
             {% if form.username.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.username( class="login__input login__input-error",placeholder="Username" )}}
                 </div>
@@ -61,7 +61,7 @@
             <!-- password -->
             {% if form.password.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.password( class="login__input login__input-error",placeholder="Password" )}}
                 </div>
@@ -79,7 +79,7 @@
             <!-- confirm password -->
             {% if form.confirm_password.errors %}
             <div class="login__box-container">
-                <div class="login__box login__box-error">
+                <div class="login__box login__box-icon-container login__box-error">
                     <i class="bx bx-user login__icon login__icon-error"></i>
                     {{ form.confirm_password( class="login__input",placeholder="Confirm Password" )}}
                 </div>
@@ -94,7 +94,7 @@
             </div>
             {% endif %}
 
-            {{ form.submit(class="button__lg bold") }}
+            {{ form.submit(class="button__lg bold mt-1 mb-1") }}
 
             <div class="text__dark">
                 <span class="text__small-bold">Already have an Account ?</span>
@@ -107,54 +107,5 @@
         </form>
     </section>
 </main>
-
-<!-- old login  -->
-<div class="container" style="display: none">
-    <h1>login page</h1>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <div class="form-group">
-                {{ form.email.label(class="form-control-label") }}
-                <!-- email -->
-                {% if form.email.errors %}
-                <!-- toggle error -->
-                {{ form.email(class="form-control form-control-lg is-invalid")
-                }}
-                <div class="invalid-feedback">
-                    {% for error in form.email.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <!-- no error -->
-                {{ form.email(class="form-control form-control-lg") }}
-                <!-- end email -->
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class="form-control-label") }}
-                <!-- password -->
-                {% if form.password.errors %}
-                <!-- toggle error -->
-                {{ form.password(class="form-control form-control-lg
-                is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.password.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <!-- no error -->
-                {{ form.password(class="form-control form-control-lg") }}
-                <!-- end of password -->
-                {% endif %}
-            </div>
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-    </form>
-</div>
 <!-- finish -->
 {% endblock content %}

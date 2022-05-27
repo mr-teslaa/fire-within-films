@@ -13,8 +13,8 @@
     --title-color: hsl(var(--hue), 4%, 15%);
     --text-color: hsl(var(--hue), 4%, 35%);
     --text-color-light: hsl(var(--hue), 4%, 65%);
-    --body-color: hsl(var(--hue), 0%, 100%);
-    --container-color: #fff;
+    --body-color: #f4f4f5;
+    --body-color-alt: #fff;
     --scroll-bar-color: hsl(var(--hue), 4%, 85%);
     --scroll-thumb-color: hsl(var(--hue), 4%, 75%);
     /*========== Font and typography ==========*/
@@ -100,7 +100,8 @@ img {
     height: auto;
 }
 
-input {
+input,
+textarea {
     width: 100%;
 }
 
@@ -118,8 +119,8 @@ button {
 }
 
 /*=============== NAVIGATION BAR ===============*/
-.header__dashboard {
-    width: 100% !important;
+.header-sm {
+    padding: 1rem 0.5rem 1rem 0.75rem;
 }
 
 .nav__menu {
@@ -133,8 +134,9 @@ button {
     padding: 0 1rem;
     display: grid;
     align-content: center;
-    border-radius: 1.25rem 1.25rem 0 0;
+    /* border-radius: 1.25rem 1.25rem 0 0; */
     transition: 0.4s;
+    background-color: var(--body-color-alt);
 }
 
 .nav__list,
@@ -158,6 +160,17 @@ button {
     font-size: 1.5rem;
 }
 
+/* article header */
+.media {
+    background: var(--body-color-alt);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.1);
+}
+
+.article__title {
+    color: #000;
+}
+
 /* buttons */
 .submit__button {
     border-color: transparent;
@@ -165,14 +178,102 @@ button {
 
 /* other stuff */
 .admin__panel-form-container {
+    width: 100%;
     padding: var(--mb-1);
     border-radius: 0.5rem;
+}
+
+/* about profile */
+.about__profile > div {
+    border-bottom: 1px solid #dadbdd;
+}
+
+.about__profile .last {
+    border-bottom: none;
+}
+/* skill */
+.skill {
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.9rem;
+    border: 1px solid #e4e5e7;
+}
+
+/* review */
+.review__star__container {
+    font-size: var(--normal-font-size);
+}
+
+.review__star {
+    color: var(--first-color);
+}
+
+/*=============== FOOTER ===============*/
+.footer {
+    background-color: var(--first-color-lighten);
+    padding-bottom: 2rem;
+}
+
+.footer__container {
+    margin-left: 1.2rem;
+    row-gap: 2rem;
+}
+
+.footer__logo,
+.footer__title {
+    font-size: var(--h3-font-size);
+    margin-bottom: var(--mb-0-75);
+}
+
+.footer__logo {
+    display: inline-block;
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+}
+
+.footer__description,
+.footer__link {
+    font-size: var(--small-font-size);
+}
+
+.footer__links {
+    display: grid;
+    row-gap: 0.5rem;
+}
+
+.footer__link {
+    color: var(--title-color);
+}
+
+.footer__social {
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.footer__social-link {
+    font-size: 1.25rem;
+    color: var(--title-color);
+}
+
+.footer__copy {
+    padding: 0 0.5rem;
+    margin-top: 6rem;
+    text-align: center;
+    font-size: var(--smaller-font-size);
+    color: var(--text-color);
 }
 
 /*=============== MEDIA QUERIES ===============*/
 /* For small devices */
 /* Remove if you choose, the minimalist design */
 @media screen and (max-width: 320px) {
+    /* .nav__name {
+        display: none;
+    } */
+}
+
+@media screen and (max-width: 460px) {
     .nav__name {
         display: none;
     }
@@ -183,6 +284,10 @@ button {
     .nav__list {
         justify-content: center;
         column-gap: 3rem;
+    }
+
+    .footer__container {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -207,5 +312,34 @@ button {
 
     .nav__name {
         padding: 0 0 0 0.75rem;
+    }
+
+    .profile__card {
+        display: grid;
+        grid-template-columns: 1.3fr 2fr;
+        gap: 1rem;
+    }
+
+    .profile__details__container .about__profile {
+        margin-top: 0;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 968px) {
+    .footer__container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .footer__social {
+        align-items: flex-start;
+    }
+    .footer__social-link {
+        font-size: 1.45rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .footer__container {
+        column-gap: 3rem;
     }
 }

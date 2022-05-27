@@ -1,4 +1,4 @@
-{% extends 'root.html' %}
+{% extends 'root-dashboard.html' %}
 
 <!-- block content -->
 {% block content %}
@@ -7,7 +7,7 @@
 <div class="container">
     <h1>Welcome back {{current_user.username}}</h1>
     
-    <div class="nav__menu">
+    <div class="nav__menu" style="display: none;">
         <button class="btn btn-info">
             <a 
                 href="{{url_for('admin.admin_create_post')}}"
@@ -28,7 +28,12 @@
         </button>
     </div>
 
-
+    <ul>
+    {% for admin in admins %}
+        <li>{{ admin.username }}</li>
+        <li>{{ current_user.username }}</li>
+    {% endfor %}
+    </ul>
     
     <!-- post list -->
     {% if posts %}

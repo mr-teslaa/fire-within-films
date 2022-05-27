@@ -100,13 +100,16 @@
 }
 
 .login__box {
-    display: grid;
-    /* grid-template-columns: max-content 1fr; */
-    column-gap: 0.5rem;
     padding: 1.125rem 1rem;
     background-color: #fff;
-    /* margin-top: 1rem; */
+    margin-top: 1rem;
     border-radius: 0.5rem;
+}
+
+.login__box-icon-container {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 0.5rem;
 }
 
 .login__box-error {

@@ -47,7 +47,8 @@ def save_picture(form_picture):
 @login_required
 def admin_dashboard():
     posts = SUPost.query.all()
-    return render_template('admin/dashboard.html', posts=posts, scrolltop=True)
+    admins = SuperUser.query.all()
+    return render_template('admin/dashboard.html', admins=admins, posts=posts, scrolltop=True)
 
 #   ACCOUNT PAGE FOR ADMINS
 @admin.route('/admin/account', methods=['GET', 'POST'])
@@ -171,7 +172,7 @@ def admin_login():
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             flash('Login success', 'success')
-            return redirect(next_page) if next_page else redirect(url_for('admin.admindashboard'))
+            return redirect(next_page) if next_page else redirect(url_for('admin.admin_dashboard'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('admin/login.html', form=form)
@@ -183,4 +184,4 @@ def admin_login():
 @login_required
 def admin_logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('public.index'))
