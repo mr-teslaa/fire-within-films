@@ -33,7 +33,7 @@ from firewithinfilms.save_image import save_post_picture
 from firewithinfilms.save_image import save_profile_picture
 
 
-user = Blueprint('user', __name__)
+user = Blueprint('users', __name__)
 
 #   DASHBOARD FOR USER
 @user.route('/user/dashboard/', methods=['GET', 'POST'])
@@ -92,7 +92,7 @@ def user_create_post():
         db.session.add(post)
         db.session.commit()
         flash('Success, your post is live now', 'success')
-        return redirect(url_for('user.user_dashboard'))
+        return redirect(url_for('users.user_dashboard'))
     return render_template('user/createpost.html', form=form)   
 
 
@@ -136,7 +136,7 @@ def user_create_post():
 @user.route('/signup/', methods=['GET', 'POST'])
 def user_signup():
     if current_user.is_authenticated:
-        return redirect(url_for('user.user_dashboard'))
+        return redirect(url_for('users.user_dashboard'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -144,7 +144,7 @@ def user_signup():
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
-        return redirect(url_for('user.user_login'))
+        return redirect(url_for('users.user_login'))
 
     return render_template('user/signup.html', form=form)
 
@@ -153,15 +153,15 @@ def user_signup():
 @user.route('/login/', methods=['GET', 'POST'])
 def user_login():
     if current_user.is_authenticated:
-        return redirect(url_for('user.user_dashboard'))
+        return redirect(url_for('users.user_dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
+        if user and bcrypt.check_password_hash(user.password, form.password.data) and user.user_role!='admin':
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             flash('Login success', 'success')
-            return redirect(next_page) if next_page else redirect(url_for('user.user_dashboard'))
+            return redirect(next_page) if next_page else redirect(url_for('users.user_dashboard'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('user/login.html', form=form)
@@ -172,4 +172,4 @@ def user_login():
 @login_required
 def user_logout():
     logout_user()
-    return redirect(url_for('user.user_login'))
+    return redirect(url_for('users.user_login'))

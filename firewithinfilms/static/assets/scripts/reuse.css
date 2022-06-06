@@ -355,6 +355,11 @@
     color: #000;
 }
 
+.alert-danger {
+    background-color: #f3281a;
+    color: #fff;
+}
+
 .bg__primary {
     /* background-color: var(--first-color-lighten); */
     background-color: #f4f6fe;

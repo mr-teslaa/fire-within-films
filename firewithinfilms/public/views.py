@@ -10,3 +10,7 @@ def index():
     #     return redirect(url_for('admindashboard'))
     return render_template('public/landing.html')
 
+@public.route('/unauthorize')
+def unauth():
+    return "You are not authorize for this action"
+

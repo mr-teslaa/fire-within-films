@@ -61,7 +61,7 @@
             </div>
 
             <div>
-                <a href="{{ url_for('user.user_create_post') }}">
+                <a href="{{ url_for('users.user_create_post') }}">
                     <i class='bx bxs-edit-alt h2-sm button'></i>
                 </a>
             </div>
@@ -69,6 +69,10 @@
 
      </div>
     
+    <h1 style="font-size: 2rem">
+        {{ current_user.username }}
+    </h1>
+
     <!-- post list -->
     {% if posts %}
     <h1 class="text__lighter h2-sm ml-75">Recent Posts</h1>

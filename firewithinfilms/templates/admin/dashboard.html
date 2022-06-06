@@ -10,20 +10,20 @@
     <div class="nav__menu" style="display: none;">
         <button class="btn btn-info">
             <a 
-                href="{{url_for('admin.admin_create_post')}}"
+                href="{{url_for('adminview.admin_create_post')}}"
                 class="text-white"    
             >Create Post</a>
         </button>
 
         <button class="btn btn-outline-info">
             <a 
-                href="{{url_for('admin.admin_edit_account')}}"   
+                href="{{url_for('adminview.admin_edit_account')}}"   
             >Edit Profile</a>
         </button>
 
         <button class="btn btn-outline-danger">
             <a 
-                href="{{url_for('admin.admin_logout')}}" 
+                href="{{url_for('adminview.admin_logout')}}" 
             >Logout</a>
         </button>
     </div>
@@ -58,7 +58,7 @@
                     width="125"    
                 />
                 <h2>
-                    <a class="article-title" href="{{ url_for('adminpost', post_id=post.id) }}">
+                    <a class="article-title" href="{{ url_for('admin_post', post_id=post.id) }}">
                         {{ post.title }}
                     </a>
                 </h2>
