@@ -125,7 +125,7 @@
     border: none;
     outline: none;
     font-size: var(--normal-font-size);
-    font-weight: 700;
+    font-weight: 500;
     color: var(--first-color-dark);
 }
 

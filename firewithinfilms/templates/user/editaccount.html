@@ -5,10 +5,27 @@
 
 <!-- landing page  -->
 <div class="container">
-    <h1>WELCOME! {{ current_user.username }}</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
+    <h1>WELCOME! {{ current_user.name }}</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                <!-- name -->
+                {% if form.name.errors %}
+                <!-- toggle error -->
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.name(class="form-control form-control-lg") }}
+                <!-- end of name -->
+                {% endif %}
+            </div>
             <div class="form-group">
                 {{ form.username.label(class="form-control-label") }}
                 <!-- username -->

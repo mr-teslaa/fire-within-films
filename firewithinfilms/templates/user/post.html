@@ -1,51 +1,48 @@
-{% extends 'root.html' %}
+{% extends 'root.html' %} 
 
 {% block content %}
-  <article class="media content-section">
-    <img 
-        class="rounded-circle article-img" 
-        src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
-        height="125"
-        width="125"    
-    />
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">{{ post.author.username }}</a>
-        <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-        {% if post.author == current_user %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('adminupdate_post', post_id=post.id) }}">Update</a>
-            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-          </div>
-        {% endif %}
-      </div>
-      <img 
-        class="rounded-circle article-img" 
-        src="{{ image_file }}"
-        height="125"
-        width="125"    
-      />
-      <h2 class="article-title">{{ post.title }}</h2>
-      <p class="article-content">{{ post.content }}</p>
-    </div>
-  </article>
-  <!-- Modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
-            <input class="btn btn-danger" type="submit" value="Delete">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+	<article class="article__container">
+		<div class="img__banner-container">
+			<img 
+				src="{{ image_file }}"
+				alt="Cover image for {{ post.title }}"
+				class="article__img"
+			/>
+		</div>
+
+		<section class="article__description">
+			<div class="article__title-container">
+				<h1 class="article__title"> {{ post.title }} </h1>
+			</div>
+
+			<div class="article__content-container">
+				<p class="article__content"> {{ post.content }} </p>
+			</div>
+
+			<!-- {% if post.author == current_user %}
+			<h2>you are real user </h2>
+			<a
+				class="btn btn-secondary btn-sm mt-1 mb-1"
+				href="{{ url_for('users.user_update_post', post_id=post.id) }}"
+			> Update </a>
+
+			<form
+				action="{{ url_for('users.user_delete_post', post_id=post.id) }}"
+				method="POST"
+			>
+				<input
+					class="btn btn-danger"
+					type="submit"
+					value="Delete"
+				/>
+			</form>
+			
+			{% else %}
+			<h2>sorry dude, its anyone else's post</h2>
+			{% endif %} -->
+
+		</section>
+</article>
+</div>
 {% endblock content %}

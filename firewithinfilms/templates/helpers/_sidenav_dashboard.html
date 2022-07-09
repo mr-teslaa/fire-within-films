@@ -1,0 +1,52 @@
+<nav class="nav__menu">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a href="{{ url_for('users.user_dashboard') }}" class="nav__link">
+				<i class="bx bx-home-alt nav__icon"></i>
+				<span class="nav__name">Home</span>
+			</a>
+		</li>
+
+		<li class="nav__item">
+			<a href="{{ url_for('users.user_inbox') }}" class="nav__link">
+				<i class="bx bx-message-rounded-dots nav__icon"></i>
+				<span class="nav__name">Inbox</span>
+			</a>
+		</li>
+
+		<li class="nav__item">
+			<a href="{{ url_for('users.user_create_post') }}" class="nav__link">
+				<i class="bx bxs-edit nav__icon"></i>
+				<span class="nav__name">Create Post</span>
+			</a>
+		</li>
+
+		<li class="nav__item">
+			<a href="{{ url_for('users.user_account') }}" class="nav__link">
+				<i class="bx bx-user nav__icon"></i>
+				<span class="nav__name">Profile</span>
+			</a>
+		</li>
+
+		<!-- <li class="nav__item">
+			<a href="{{ url_for('users.user_account') }}" class="nav__link">
+				<i class="bx bx-book-alt nav__icon"></i>
+				<span class="nav__name">Profile Description</span>
+			</a>
+		</li> -->
+
+		<li class="nav__item">
+			<a href="#portfolio" class="nav__link">
+				<i class="bx bx-lock nav__icon"></i>
+				<span class="nav__name">Change Password</span>
+			</a>
+		</li>
+
+		<li class="nav__item">
+			<a href="{{ url_for('users.user_logout') }}" class="nav__link active-link btn__red-alt">
+				<i class="bx bx-log-out nav__icon"></i>
+				<span class="nav__name">Logout</span>
+			</a>
+		</li>
+	</ul>
+</nav>

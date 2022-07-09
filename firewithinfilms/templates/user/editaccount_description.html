@@ -1,0 +1,235 @@
+{% extends 'root-dashboard.html' %}
+
+<!-- block content -->
+{% block content %}
+
+<!-- landing page  -->
+<div class="container">
+    <h1>Edit Profile Description! {{ current_user.name }}</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                <!-- description -->
+                {% if form.description.errors %}
+                <!-- toggle error -->
+                {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.description(class="form-control form-control-lg") }}
+                <!-- end of description -->
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.primary_lang.label(class="form-control-label") }}
+                <!-- primary_lang -->
+                {% if form.primary_lang.errors %}
+                <!-- toggle error -->
+                {{ form.primary_lang(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.primary_lang.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.primary_lang(class="form-control form-control-lg") }}
+                <!-- end of primary_lang -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.secondary_lang.label(class="form-control-label") }}
+                <!-- secondary_lang -->
+                {% if form.secondary_lang.errors %}
+                <!-- toggle error -->
+                {{ form.secondary_lang(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.secondary_lang.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.secondary_lang(class="form-control form-control-lg") }}
+                <!-- end of secondary_lang -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.skill_1.label(class="form-control-label") }}
+                <!-- skill_1 -->
+                {% if form.skill_1.errors %}
+                <!-- toggle error -->
+                {{ form.skill_1(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skill_1.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.skill_1(class="form-control form-control-lg") }}
+                <!-- end of skill_1 -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.skill_2.label(class="form-control-label") }}
+                <!-- skill_2 -->
+                {% if form.skill_2.errors %}
+                <!-- toggle error -->
+                {{ form.skill_2(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skill_2.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.skill_2(class="form-control form-control-lg") }}
+                <!-- end of skill_2 -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.skill_3.label(class="form-control-label") }}
+                <!-- skill_3 -->
+                {% if form.skill_3.errors %}
+                <!-- toggle error -->
+                {{ form.skill_3(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skill_3.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.skill_3(class="form-control form-control-lg") }}
+                <!-- end of skill_3 -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.skill_4.label(class="form-control-label") }}
+                <!-- skill_4 -->
+                {% if form.skill_4.errors %}
+                <!-- toggle error -->
+                {{ form.skill_4(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skill_4.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.skill_4(class="form-control form-control-lg") }}
+                <!-- end of skill_4 -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.skill_5.label(class="form-control-label") }}
+                <!-- skill_5 -->
+                {% if form.skill_5.errors %}
+                <!-- toggle error -->
+                {{ form.skill_5(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.skill_5.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.skill_5(class="form-control form-control-lg") }}
+                <!-- end of skill_5 -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.education_institue_name.label(class="form-control-label") }}
+                <!-- education_institue_name -->
+                {% if form.education_institue_name.errors %}
+                <!-- toggle error -->
+                {{ form.education_institue_name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.education_institue_name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.education_institue_name(class="form-control form-control-lg") }}
+                <!-- end of education_institue_name -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.education_institue_country.label(class="form-control-label") }}
+                <!-- education_institue_country -->
+                {% if form.education_institue_country.errors %}
+                <!-- toggle error -->
+                {{ form.education_institue_country(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.education_institue_country.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.education_institue_country(class="form-control form-control-lg") }}
+                <!-- end of education_institue_country -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.education_graduation_name.label(class="form-control-label") }}
+                <!-- education_graduation_name -->
+                {% if form.education_graduation_name.errors %}
+                <!-- toggle error -->
+                {{ form.education_graduation_name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.education_graduation_name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.education_graduation_name(class="form-control form-control-lg") }}
+                <!-- end of education_graduation_name -->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.education_graduation_year.label(class="form-control-label") }}
+                <!-- education_graduation_year -->
+                {% if form.education_graduation_year.errors %}
+                <!-- toggle error -->
+                {{ form.education_graduation_year(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.education_graduation_year.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <!-- no error -->
+                {{ form.education_graduation_year(class="form-control form-control-lg") }}
+                <!-- end of education_graduation_year -->
+                {% endif %}
+            </div>
+
+            
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+<!-- finish -->
+{% endblock content %}

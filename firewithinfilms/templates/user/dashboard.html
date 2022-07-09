@@ -1,120 +1,108 @@
 {% extends 'root-dashboard.html' %}
 
-{% block head %} 
-<link rel="stylesheet" href="{{ url_for('static', filename='assets/scripts/reuse.css') }}">
+<!--  -->
+{% block head %}
+<link
+	rel="stylesheet"
+	href="{{ url_for('static', filename='assets/scripts/reuse.css') }}"
+/>
 {% endblock %}
 
-
+<!--  -->
 {% block content %}
-<main style="margin-bottom: 5rem;">
-    <!-- <h1>Welcome back {{current_user.username}}</h1> -->
+
+<!-- main content -->
+{% if current_user.user_role != 'admin' %}
+	<!-- complete your profile -->
+	{% if complete_account != True %}
+	<div class="alert alert__info">
+		You account is incomplete.
+		<a href="{{ url_for('users.user_edit_account') }}" class="link">
+			Let's complete your profile first
+		</a>
+		and ROCK it 😎
+	</div>
+	{% elif completed_account_descreption != True %}
+	<div class="alert alert__info">
+		Impressive 😍 {{ current_user.name }}. One last step,
+		<a href="{{ url_for('users.user_edit_description') }}" class="link">
+			Let's complete your profile description
+		</a>
+		😎
+	</div>
+	{% endif %} 
     
-    <div class="container px-75 pl-75">
-        <nav class="nav__menu">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a href="#home" class="nav__link">
-                        <i class="bx bx-home-alt nav__icon"></i>
-                        <span class="nav__name">Home</span>
-                    </a>
-                </li>
-                
-                <li class="nav__item">
-                    <a href="#about" class="nav__link">
-                        <i class="bx bx-user nav__icon"></i>
-                        <span class="nav__name">About</span>
-                    </a>
-                </li>
+{% endif %}
 
-                <li class="nav__item">
-                    <a href="#skills" class="nav__link">
-                        <i class="bx bx-book-alt nav__icon"></i>
-                        <span class="nav__name">Skills</span>
-                    </a>
-                </li>
+<div class="px-2 pl-75">
+	{% include 'helpers/_sidenav_dashboard.html' %}
 
-                <li class="nav__item">
-                    <a href="#portfolio" class="nav__link">
-                        <i class="bx bx-briefcase-alt nav__icon"></i>
-                        <span class="nav__name">Portfolio</span>
-                    </a>
-                </li>
+	<div
+		class="section header-sm flex flex-j-space-between flex-a-center p-5"
+	>
+		<div class="flex flex-j-start flex-a-center">
+			<img
+				src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}"
+				alt="{{current_user.name}} - FireWithinFilms"
+				class="img__round-sm mx-1"
+			/>
+			<h2 class="h2-sm">Home</h2>
+		</div>
 
-                <li class="nav__item">
-                    <a href="#contactme" class="nav__link active-link">
-                        <i class="bx bx-message-square-detail nav__icon"></i>
-                        <span class="nav__name">Contactme</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-   
+		<div>
+			<a href="{{ url_for('users.user_create_post') }}">
+				<i class="bx bxs-edit-alt h2-sm button"></i>
+			</a>
+			<a href="{{ url_for('users.user_logout') }}" class="btn__red-alt">		
+				Logout
+			</a>
+		</div>
+	</div>
 
-        <div class="section header-sm flex flex-j-space-between flex-a-center p-5">
-            <div class="flex flex-j-start flex-a-center">
-                <img 
-                src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
-                alt="{{current_user.name}} - FireWithinFilms"
-                class="img__round-sm mx-1"    
-            /> 
-            <h2 class="h2-sm">Home</h2>
-            </div>
+	<!-- <h1 style="font-size: 2rem">{{ current_user.username }}</h1> -->
 
-            <div>
-                <a href="{{ url_for('users.user_create_post') }}">
-                    <i class='bx bxs-edit-alt h2-sm button'></i>
-                </a>
-            </div>
-        </div>
+	<!-- post list -->
+	{% if posts %}
+	<h1 class="text__lighter h2-sm ml-75">Recent Posts</h1>
+	
+	{% for post in posts %}
+	<article class="media content-section my-1 mx-5 ml-5 px-75 pl-75">
+			<div class="container article__header flex pt-5">
+				<img
+					class="img__round-sm"
+					src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
+				/>
 
-     </div>
-    
-    <h1 style="font-size: 2rem">
-        {{ current_user.username }}
-    </h1>
+				<div class="article-metadata pl-1">
+					<a class="h3-sm mr-2 d-block" href="{{ url_for('users.user_profile', username=current_user.username) }}">
+						{{ post.author.username }}
+					</a>
+					<small>
+						{{ post.date_posted.strftime('%d-%m-%Y') }}
+					</small>
+				</div>
+			</div>
 
-    <!-- post list -->
-    {% if posts %}
-    <h1 class="text__lighter h2-sm ml-75">Recent Posts</h1>
-    {% for post in posts %}
-        <article class="media content-section my-1 mx-5 ml-5 px-75 pl-75">
-            <div class="container article__header flex pt-5">
-                <img 
-                    class="img__round-sm"
-                    src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" 
-                />
+			<div class="container media-body pt-5 pb-5">
+				<div>
+					<a href="{{ url_for('users.user_post', post_id=post.id) }}">
+						<h2 class="article__title">
+							{{ post.title }}
+						</h2>
 
-                <div class="article-metadata pl-1">
-                    <a class="h3-sm mr-2 d-block" href="#">{{ post.author.username }}</a>
-                    <small class="d-block">{{ post.date_posted.strftime('%d-%m-%Y') }}</small>
-                </div>
-            </div>
-           
-            <div class="container media-body pt-5 pb-5">
-                
-                <!-- <img 
-                    class="rounded-circle article-img" 
-                    src="{{ url_for('static', filename='pictures/' + post.image_file) }}"
-                    height="125"
-                    width="125"    
-                /> -->
-                <div class="article__container">
-                    <a href="#">
-                        <h2>
-                            <a class="article__title" href="#"> {{ post.title }} </a>
-                        </h2>
+						<p class="article-content">
+							{{ post.content | truncate(200) }}
+						</p>
+					</a>
+				</div>
+			</div>
 
-                        <p class="article-content">{{ post.content | truncate(100) }}</p>
-                    </a>
-                </div>
+	</article>
+	{% endfor %} 
 
-                
-            </div>
-        </article>
-    {% endfor %}
-    {% else %}
-    <h1>No post created yet</h1>
-    {% endif %}
-</main>
+	{% else %}
+	<h1>No post created yet</h1>
+	{% endif %}
+</div>
 <!-- finish -->
 {% endblock content %}

@@ -3,8 +3,8 @@
 <!-- additional links -->
 {% block head %}
 <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
+	rel="stylesheet"
+	href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
 />
 {% endblock %}
 
@@ -13,67 +13,69 @@
 
 <!-- login page -->
 <main class="center__center bg__primary">
-    <section class="login__forms">
-        <h1 class="login__title text__center">FireWithinFilms</h1>
+	<section class="login__forms">
+		<h1 class="login__title text__center">FireWithinFilms</h1>
 
-        <form method="POST" action="" class="login__register" id="login-in">
-            {{ form.hidden_tag() }}
-            <h1>Signin</h1>
+		<form method="POST" action="" class="login__register" id="login-in">
+			{{ form.hidden_tag() }}
+			<h1>Signin</h1>
 
-            <!-- email -->
-            {% if form.email.errors %}
-            <div class="login__box-container">
-                <div class="login__box login__box-icon-container login__box-error">
-                    <i class="bx bx-user login__icon login__icon-error"></i>
-                    {{ form.email( class="login__input login__input-error",placeholder="E-mail" )}}
-                </div>
-                {% for error in form.email.errors %}
-                    <small class="error__message">{{ error }}</small>
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="login__box login__box-icon-container">
-                <i class="bx bx-user login__icon"></i>                
-                {{ form.email(class="login__input", placeholder="E-mail") }}
-            </div>
-            {% endif %}
+			<!-- email -->
+			{% if form.email.errors %}
+			<div class="login__box-container">
+				<div
+					class="login__box login__box-icon-container login__box-error"
+				>
+					<!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
+					{{ form.email( class="login__input
+					login__input-error",placeholder="E-mail" )}}
+				</div>
+				{% for error in form.email.errors %}
+				<small class="error__message">{{ error }}</small>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="login__box login__box-icon-container">
+				<!-- <i class="bx bx-user login__icon"></i>                 -->
+				{{ form.email(class="login__input", placeholder="E-mail") }}
+			</div>
+			{% endif %}
 
-            <!-- password -->
-            {% if form.password.errors %}
-            <div class="login__box-container">
-                <div class="login__box login__box-icon-container login__box-error">
-                    <i class="bx bx-user login__icon login__icon-error"></i>
-                    {{ form.password( class="login__input login__input-error",placeholder="Password" )}}
-                </div>
-                {% for error in form.password.errors %}
-                    <small class="error__message">{{ error }}</small>
-                {% endfor %}
-            </div>
-            {% else %}
-            <div class="login__box login__box-icon-container">
-                <i class="bx bx-user login__icon"></i>                
-                {{ form.password(class="login__input", placeholder="Password") }}
-            </div>
-            {% endif %}
+			<!-- password -->
+			{% if form.password.errors %}
+			<div class="login__box-container">
+				<div
+					class="login__box login__box-icon-container login__box-error"
+				>
+					<!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
+					{{ form.password( class="login__input
+					login__input-error",placeholder="Password" )}}
+				</div>
+				{% for error in form.password.errors %}
+				<small class="error__message">{{ error }}</small>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="login__box login__box-icon-container">
+				<!-- <i class="bx bx-user login__icon"></i>                 -->
+				{{ form.password(class="login__input", placeholder="Password")
+				}}
+			</div>
+			{% endif %}
 
-            <a href="#" class="text__dark login__forgot">Forgot password?</a>
+			<a href="#" class="text__dark login__forgot">Forgot password?</a>
 
-            {{ form.submit(class="button__lg bold mxy-2") }}
+			{{ form.submit(class="button__lg bold mxy-2") }}
 
-            <div class="text__dark">
-                <span class="text__small-bold">Don't have an Account ?</span>
-                <span class="link bold" id="sign-up">
-                    <a class="link" href="{{ url_for('users.user_signup') }}">
-                        Sign Up
-                    </a>
-                </span>
-            </div>
-
-            <ul>
-                <li>Email: </li>
-                <li>Password: </li>
-            </ul>
-        </form>
-    </section>
+			<div class="text__dark">
+				<span class="text__small-bold">Don't have an Account ?</span>
+				<span class="link bold" id="sign-up">
+					<a class="link" href="{{ url_for('users.user_signup') }}">
+						Sign Up
+					</a>
+				</span>
+			</div>
+		</form>
+	</section>
 </main>
 {% endblock content %}

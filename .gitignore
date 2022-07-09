@@ -1,4 +1,5 @@
 .prettierignore
+.vscode/
 migrations/
 env/
 __pycache__/

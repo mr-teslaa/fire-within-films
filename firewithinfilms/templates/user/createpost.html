@@ -1,96 +1,129 @@
 {% extends 'root-dashboard.html' %}
 
-{% block head %} 
+<!--  -->
+{% block head %}
 <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
+	rel="stylesheet"
+	href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
 />
 {% endblock %}
 
+<!--  -->
 {% block content %}
-<form method="POST" action="" enctype="multipart/form-data">
-    <div class="shadow__primary">
-        <div class="container">
-            <div class="header-sm flex flex-j-space-between flex-a-center p-5">
-                <i class='bx bx-left-arrow-alt h2-sm' style="font-weight: 800"></i>
-                <span>
-                    {{ form.submit(class="button button__sm submit__button")}}
-                </span>
-            </div>
-        </div>
-    </div>
-        
-    <div class="container bg__primary-alt admin__panel-form-container my-1">
-        <div class="flex flex-j-start flex-a-center p-5">
-            <img 
-                src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}" 
-                alt="{{current_user.name}} - FireWithinFilms"
-                class="img__round-sm mx-1"    
-            /> 
-            <h2 class="h2-sm">Create Post</h2>
-        </div>
+	
+<!--  -->
+{% include 'helpers/_sidenav_dashboard.html' %}
 
-    
-        {{ form.hidden_tag() }}
+<div class="px-2 pl-75">
+	<form method="POST" action="" enctype="multipart/form-data">
+		<div class="container">
+			<div
+				class="header-sm flex flex-j-space-between flex-a-center p-5"
+			>
+				<a
+					href="{{ url_for('users.user_dashboard') }}"
+					class="button button__sm button__second submit__button button__alt flex"
+				>
+					<i class="bx bx-left-arrow-alt h2-sm"></i>
+					<p>Go Back</p>
+				</a>
+				<span>
+					{{ form.submit(class="button button__sm submit__button")}}
+				</span>
+			</div>
+		</div>
+		
 
-        <!-- post title -->
-        {{ form.title.label(class="ml-5 text-bold") }}
-        {% if form.title.errors %}
-            <div class="login__box-container login__box-lighter my-5 mb-75">
-                <div class="login__box login__box-error">
-                    {{ form.title( class="login__input login__input-error",placeholder="Post Title" )}}
-                </div>
-                {% for error in form.title.errors %}
-                    <small class="error__message">{{ error }}</small>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="login__box login__box-lighter my-5 mb-75">    
-                {{ form.title(class="login__input", placeholder="Post Title") }}
-            </div>
-        {% endif %}
-        
+		<div
+			class="container bg__primary-alt admin__panel-form-container my-1"
+		>
+			<div class="flex flex-j-start flex-a-center p-5">
+				<img
+					src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}"
+					alt="{{current_user.name}} - FireWithinFilms"
+					class="img__round-sm mx-1"
+				/>
+				<h2 class="h2-sm">Create Post</h2>
+			</div>
 
-        <!-- post content -->
-        {{ form.content.label(class="ml-5 text-bold") }}
-        {% if form.content.errors %}
-            <div class="login__box-container login__box-lighter my-5 mb-75">
-                <div class="login__box login__box-error">
-                    {{ form.content( class="login__input login__details login__input-error",placeholder="Write your thoughts..." )}}
-                </div>
-                {% for error in form.content.errors %}
-                    <small class="error__message">{{ error }}</small>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="login__box login__box-lighter my-5 mb-75">         
-                {{ form.content(
-                    class="login__input login__details", 
-                    placeholder="Write your thoughts..."
-                ) }}
-            </div>
-        {% endif %}
+			{{ form.hidden_tag() }}
 
-        
-        <!-- post banner -->
-        {{ form.picture.label(class="ml-5 text-bold") }}
-        {% if form.picture.errors %}
-            <div class="login__box-container login__box-lighter my-5 mb-75">
-                <div class="login__box login__box-error">
-                    {{ form.picture( class="login__input login__input-error",placeholder="Add banner image" )}}
-                </div>
-                {% for error in form.picture.errors %}
-                    <small class="error__message">{{ error }}</small>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="login__box login__box-lighter my-5 mb-75">               
-                {{ form.picture(class="login__input", placeholder="Add banner image") }}
-            </div>
-        {% endif %}
-        <!-- <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div> -->
-    </div>
- </form>
+			<!-- post title -->
+			{{ form.title.label(class="ml-5 text-bold") }} 
+			
+			{% if form.title.errors %}
+			<div class="login__box-container login__box-lighter my-5 mb-75">
+				<div class="login__box login__box-error">
+					{{ form.title( 
+						class="login__input login__input-error",
+						placeholder="Post Title" 
+					) }}
+				</div>
+				{% for error in form.title.errors %}
+				<small class="error__message">{{ error }}</small>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="login__box login__box-lighter my-5 mb-75">
+				{{ form.title(
+					class="login__input", 
+					placeholder="Post Title"
+				) }}
+			</div>
+			{% endif %}
+
+			<!-- post content -->
+			{{ form.content.label(class="ml-5 text-bold") }} 
+			
+			{% if form.content.errors %}
+			<div class="login__box-container login__box-lighter my-5 mb-75">
+				<div class="login__box login__box-error">
+					{{ form.content( 
+						class="login__input login__details login__input-error",
+						placeholder="Write your thoughts...",
+						rows="10"
+					) }}
+				</div>
+				{% for error in form.content.errors %}
+				<small class="error__message">{{ error }}</small>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="login__box login__box-lighter my-5 mb-75">
+				{{ form.content( 
+					class="login__input login__details",
+					placeholder="Write your thoughts...",
+					rows="10" 
+				) }}
+			</div>
+			{% endif %}
+
+			<!-- post banner -->
+			{{ form.picture.label(class="ml-5 text-bold") }} 
+			
+			{% if form.picture.errors %}
+			<div class="login__box-container login__box-lighter my-5 mb-75">
+				<div class="login__box login__box-error">
+					{{ form.picture( 
+						class="login__input login__input-error",
+						placeholder="Add banner image" 
+					)}}
+				</div>
+				{% for error in form.picture.errors %}
+				<small class="error__message">{{ error }}</small>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="login__box login__box-lighter my-5 mb-75">
+				{{ form.picture(
+					class="login__input", 
+					placeholder="Add banner image"
+				) }}
+			</div>
+			{% endif %}
+			
+		</div>
+	</form>
+</div>
+
 {% endblock content %}
