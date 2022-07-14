@@ -60,15 +60,15 @@
 
             <div class="home__data">
                 <h1 class="home__title">
-                    Unleash your <br />
-                    inner POWER
+                    Unleash Your <br />
+                    <span style="color: var(--first-color)">Inner POWER</span> 
                 </h1>
                 <p class="home__description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nesciunt cumque rem reiciendis.
+                    Channel the artist in you and kickstart your journey on Fire Within Films. 
+                    Meet like-minded people, collaborate on projects, and win big!
                 </p>
 
-                <a href="#" class="button">Get Started</a>
+                <a href="{{ url_for('users.user_signup') }}" class="button">Get Started, It's Free</a>
             </div>
         </div>
     </section>
@@ -78,8 +78,10 @@
         <div class="about__container grid">
             <div class="about__data">
                 <h2 class="section__title">
-                    Tons of talent on <br />
-                    your fingertips
+                    <span style="color: var(--first-color); font-style: italic;">
+                        Find talents
+                    </span>, <br />
+                    or become one! 
                 </h2>
                 <div class="about__description">
                     <div class="check__group">
@@ -91,9 +93,8 @@
                                     The best for every budget
                                 </h3>
                                 <p class="check_details">
-                                    Find high-quality services at every price
-                                    point. No hourly rates, just project-based
-                                    pricing.
+                                    Find talented creatives at every price point. 
+                                    No hourly rates, just project-based pricing.
                                 </p>
                             </div>
                         </div>
@@ -108,8 +109,21 @@
                                     Quality work done quickly
                                 </h3>
                                 <p class="check_details">
-                                    Find the right freelancer to begin working
-                                    on your project within minutes.
+                                    Find the right partner to begin working on your project within minutes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check__group">
+                        <div class="check__data">
+                            <i class="bx bxs-badge-check"></i>
+
+                            <div>
+                                <h3 class="check__name">Learn and grow</h3>
+                                <p class="check_details">
+                                    Events and workshops especially curated for you will help you 
+                                    learn and start your journey in the entertainment industry.
                                 </p>
                             </div>
                         </div>
@@ -122,8 +136,7 @@
                             <div>
                                 <h3 class="check__name">Online support</h3>
                                 <p class="check_details">
-                                    Questions? Our round-the-clock support team
-                                    is available to help anytime, anywhere.
+                                    Questions? Our round-the-clock support team is available to help anytime, anywhere.
                                 </p>
                             </div>
                         </div>
@@ -147,9 +160,10 @@
                     Get more
                 </h2>
                 <p class="security__description">
-                    Finding right people with budget is hard.
-                    <strong>FireWithinFilms</strong> always be your side to find
-                    the right people for your next project
+                    Finding the right people with a budget is hard. 
+                    <strong>FireWithinFilms</strong> will be by your side to help find the right people for your next project. 
+                    <br />
+                    You can collaborate with other users, and post about your project. We will ensure that your efforts are noticed!              
                 </p>
             </div>
 
@@ -164,7 +178,7 @@
     <section class="discover section">
         <h2 class="section__title text__center">Make it real</h2>
         <h2 class="section__subtitle text__center">
-            Explore categroies to find your next talent
+            Explore categories to find your next talent <b>OR</b> get a head start on your journey! 
         </h2>
 
         <div class="discover__container container swiper-container">
@@ -177,10 +191,10 @@
                         class="discover__img"
                     />
                     <div class="discover__data">
-                        <h2 class="discover__title">Sing</h2>
-                        <span class="discover__description">
+                        <h2 class="discover__title">Singing</h2>
+                        <!-- <span class="discover__description">
                             Share your message
-                        </span>
+                        </span> -->
                     </div>
                 </div>
 
@@ -192,10 +206,10 @@
                         class="discover__img"
                     />
                     <div class="discover__data">
-                        <h2 class="discover__title">Dance</h2>
-                        <span class="discover__description">
+                        <h2 class="discover__title">Voice Acting</h2>
+                        <!-- <span class="discover__description">
                             Explore your talent
-                        </span>
+                        </span> -->
                     </div>
                 </div>
 
@@ -207,13 +221,85 @@
                         class="discover__img"
                     />
                     <div class="discover__data">
-                        <h2 class="discover__title">Videography</h2>
-                        <span class="discover__description">
+                        <h2 class="discover__title">Directing</h2>
+                        <!-- <span class="discover__description">
                             Visualize your story
-                        </span>
+                        </span> -->
+                    </div>
+                </div>
+
+                <!--==================== DISCOVER 4 ====================-->
+                <div class="discover__card swiper-slide">
+                    <img
+                        src="{{ url_for('static', filename='assets/public/img/videography.webp') }}"
+                        alt=""
+                        class="discover__img"
+                    />
+                    <div class="discover__data">
+                        <h2 class="discover__title">Music and Audio</h2>
+                        <!-- <span class="discover__description">
+                            Visualize your story
+                        </span> -->
+                    </div>
+                </div>
+                
+                <!--==================== DISCOVER 5 ====================-->
+                <div class="discover__card swiper-slide">
+                    <img
+                        src="{{ url_for('static', filename='assets/public/img/videography.webp') }}"
+                        alt=""
+                        class="discover__img"
+                    />
+                    <div class="discover__data">
+                        <h2 class="discover__title">Acting</h2>
+                        <!-- <span class="discover__description">
+                            Visualize your story
+                        </span> -->
+                    </div>
+                </div>
+                
+                <!--==================== DISCOVER 6 ====================-->
+                <div class="discover__card swiper-slide">
+                    <img
+                        src="{{ url_for('static', filename='assets/public/img/videography.webp') }}"
+                        alt=""
+                        class="discover__img"
+                    />
+                    <div class="discover__data">
+                        <h2 class="discover__title">Writing</h2>
+                        <!-- <span class="discover__description">
+                            Visualize your story
+                        </span> -->
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!--=============== BE A TRAILBLAZER ===============-->
+    <section class="about section container" id="about">
+        <div class="about__container grid">
+            <div class="about__data">
+                <h2 class="section__title">
+                    Be a
+                    <span style="color: var(--first-color); font-style: italic;">
+                        trailblazer
+                    </span>! 
+                </h2>
+                <p class="about__description">
+                    Have a talent that you don't see on the list? Be a trailblazer in the community 
+                    and showcase your talents. Work on official projects from Fire Within Films and get REAL experience!
+                </p>
+
+                <a href="{{ url_for('users.user_signup') }}" class="button" style="line-height: 5">
+                    Get Started, It's Free
+                </a>
+            </div>
+
+            <img
+                class="svg__img svg__color about__img"
+                src="{{ url_for('static', filename='assets/public/svg/about-svg.svg') }}"
+            />
         </div>
     </section>
 
@@ -1273,24 +1359,24 @@
             <div class="contact__content">
                 <h2 class="section__title">Let's talk</h2>
                 <p class="contact__description">
-                    Have a project in mind? <br />
-                    Want the best people to work in your project?<br />
-                    <strong>We got your back</strong>
+                    Have a project in mind? Want to work with us? <br />
+                    Suggestions, or questions? 
+                    <strong> We have the solution for everything </strong>.
                 </p>
             </div>
 
             <ul class="contact__content grid">
                 <li class="contact__address">
-                    Telephone:
-                    <span class="contact__information">999 - 888 - 777</span>
+                    Phone & Whatsapp:
+                    <span class="contact__information">+916291923530</span>
                 </li>
                 <li class="contact__address">
                     Email:
-                    <span class="contact__information">delivery@email.com</span>
+                    <span class="contact__information">info@firewithinfilms.com</span>
                 </li>
                 <li class="contact__address">
                     Location:
-                    <span class="contact__information">Lima - Peru</span>
+                    <span class="contact__information">Kolkata, West Bengal, India.</span>
                 </li>
             </ul>
 

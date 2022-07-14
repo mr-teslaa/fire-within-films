@@ -478,7 +478,8 @@
 	justify-self: center;
 }
 
-.img__round-sm {
+.img__round-sm,
+.avatar {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;

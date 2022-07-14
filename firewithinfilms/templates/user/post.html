@@ -43,6 +43,23 @@
 			{% endif %} -->
 
 		</section>
-</article>
+	</article>
+	<aside class="card">
+		<div class="card__header flex flex-j-start">
+			<div class="card__header-img-container mx-1">
+				<img 
+					src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" 
+					class="avatar"
+					alt="" 
+				/>
+			</div>
+
+			<div class="card__header-title-container">
+				<p class="card__header-title">
+					{{ current_user.name }}
+				</p>
+			</div>
+		</div>
+	</aside>
 </div>
 {% endblock content %}
