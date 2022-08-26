@@ -24,8 +24,11 @@
             {% if form.email.errors %}
             <div class="login__box-container">
                 <div class="login__box login__box-icon-container login__box-error">
-                    <!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
-                    {{ form.email( class="login__input",placeholder="E-mail" )}}
+                    {{ form.email( 
+                        id="email",
+                        class="login__input",
+                        placeholder="E-mail" 
+                    )}}
                 </div>
                 {% for error in form.email.errors %}
                     <small class="error__message">{{ error }}</small>
@@ -33,8 +36,11 @@
             </div>
             {% else %}
             <div class="login__box">
-                <!-- <i class="bx bx-user login__icon"></i>                 -->
-                {{ form.email(class="login__input", placeholder="E-mail") }}
+                {{ form.email(
+                    id="email",
+                    class="login__input", 
+                    placeholder="E-mail"
+                ) }}
             </div>
             {% endif %}
 
@@ -43,8 +49,11 @@
             {% if form.username.errors %}
             <div class="login__box-container">
                 <div class="login__box login__box-icon-container login__box-error">
-                    <!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
-                    {{ form.username( class="login__input login__input-error",placeholder="Username" )}}
+                    {{ form.username( 
+                        id="username",
+                        class="login__input login__input-error",
+                        placeholder="Username" 
+                    )}}
                 </div>
                 {% for error in form.username.errors %}
                     <small class="error__message">{{ error }}</small>
@@ -52,8 +61,11 @@
             </div>
             {% else %}
             <div class="login__box">
-                <!-- <i class="bx bx-user login__icon"></i>                 -->
-                {{ form.username(class="login__input", placeholder="Username") }}
+                {{ form.username(
+                    id="username",
+                    class="login__input", 
+                    placeholder="Username"
+                ) }}
             </div>
             {% endif %}
 
@@ -62,7 +74,6 @@
             {% if form.password.errors %}
             <div class="login__box-container">
                 <div class="login__box login__box-icon-container login__box-error">
-                    <!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
                     {{ form.password( class="login__input login__input-error",placeholder="Password" )}}
                 </div>
                 {% for error in form.password.errors %}
@@ -71,8 +82,10 @@
             </div>
             {% else %}
             <div class="login__box">
-                <!-- <i class="bx bx-user login__icon"></i>                 -->
-                {{ form.password(class="login__input", placeholder="Password") }}
+                {{ form.password(
+                    class="login__input", 
+                    placeholder="Password"
+                ) }}
             </div>
             {% endif %}
 
@@ -80,8 +93,10 @@
             {% if form.confirm_password.errors %}
             <div class="login__box-container">
                 <div class="login__box login__box-icon-container login__box-error">
-                    <!-- <i class="bx bx-user login__icon login__icon-error"></i> -->
-                    {{ form.confirm_password( class="login__input",placeholder="Confirm Password" )}}
+                    {{ form.confirm_password( 
+                        class="login__input",
+                        placeholder="Confirm Password" 
+                    )}}
                 </div>
                 {% for error in form.confirm_password.errors %}
                     <small class="error__message">{{ error }}</small>
@@ -89,8 +104,10 @@
             </div>
             {% else %}
             <div class="login__box">
-                <!-- <i class="bx bx-user login__icon"></i>                 -->
-                {{ form.confirm_password(class="login__input", placeholder="Confirm Password") }}
+                {{ form.confirm_password(
+                    class="login__input", 
+                    placeholder="Confirm Password"
+                ) }}
             </div>
             {% endif %}
 
@@ -109,3 +126,17 @@
 </main>
 <!-- finish -->
 {% endblock content %}
+
+
+{% block js %} 
+<script>
+    const username = document.querySelector('#username'),
+        email = document.querySelector('#email'),
+        submit = document.querySelector('#submit');
+
+    submit.addEventListener('click', () => {
+        username.value = username.value.toLowerCase();
+        email.value = email.value.toLowerCase();
+    })
+</script>
+{% endblock %}

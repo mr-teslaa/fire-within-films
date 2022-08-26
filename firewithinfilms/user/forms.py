@@ -4,6 +4,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
 from flask_wtf.file import FileAllowed
 from flask_login import current_user
+from flask_ckeditor import CKEditorField
 from wtforms import StringField
 from wtforms import PasswordField
 from wtforms import SubmitField
@@ -254,8 +255,16 @@ class UpdateAccountDescriptionForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('What is happening?', validators=[DataRequired()])
+    title = StringField(
+        'Title', 
+        validators=[ DataRequired() ]
+    )
+
+    content = CKEditorField(
+        'What is happening?', 
+        validators=[ DataRequired() ]
+    )
+   
     picture = FileField(
         'Add a banner image', 
         validators = [

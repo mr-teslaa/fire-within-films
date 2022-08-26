@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from firewithinfilms.config import Config
+from flask_ckeditor import CKEditor
 
 from flask_admin import Admin
 from firewithinfilms.admin import AccessAdminPanel
@@ -15,6 +16,7 @@ login_manager = LoginManager()
 migrate = Migrate()
 admin = Admin()
 mail = Mail()
+ckeditor = CKEditor()
 
 from firewithinfilms.models import User
 
@@ -38,6 +40,7 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
     mail.init_app(app)
     migrate.init_app(app, db)
+    ckeditor.init_app(app)
 
     admin = Admin(app, name='Fire Within Films', template_mode='bootstrap4')
 

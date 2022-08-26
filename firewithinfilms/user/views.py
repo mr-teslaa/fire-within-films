@@ -394,10 +394,33 @@ def user_inbox():
 @user.route("/user/post/<int:post_id>/")
 def user_post(post_id):
     post = UserPost.query.get_or_404(post_id)
-    image_file = url_for('static', filename='pictures/' + post.image_file)
-    print(f'image url is {image_file}')
-    print(f'image is {post.image_file}')
-    return render_template('user/post.html', title=post.title, post=post, image_file=image_file)
+    post_author_details = UserDetails.query.filter_by(user_id=post.author.id)
+    author_all_post = UserPost.query.filter_by(user_id=post.author.id).all()
+    print('======= author all post =============')
+    print(author_all_post)
+    print('====================')
+
+    # query suggest blog post with pagination
+    post_query = UserPost.query.paginate(1, 4, False)
+    suggest_post_author = post_query.items
+    print('======= suggested post author =============')
+    print(suggest_post_author)
+    for author in suggest_post_author:
+        print(author.author.name)
+    print('====================')
+    
+
+    if post.image_file:
+        image_file = url_for('static', filename='pictures/' + post.image_file)
+        image_file_status = True
+        print(f'image url is {image_file}')
+        print(f'image is {post.image_file}')
+
+        return render_template('user/post.html', title=post.title, post=post, image_file=image_file, image_file_status=image_file_status, post_author_details=post_author_details, author_all_post=author_all_post, suggest_post_author=suggest_post_author)
+    else:
+        image_file_status = False
+
+    return render_template('user/post.html', title=post.title, post=post, image_file_status=image_file_status, post_author_details=post_author_details,author_all_post=author_all_post, suggest_post_author=suggest_post_author)
 
 #   CREATE POST
 @user.route('/post/create/', methods=['GET', 'POST'])

@@ -147,8 +147,13 @@ body.dark-theme {
 /*=============== LAYOUT ===============*/
 .container {
     max-width: 968px;
-    margin-left: var(--mb-1-5);
-    margin-right: var(--mb-1-5);
+    /* margin-left: var(--mb-1-5);
+    margin-right: var(--mb-1-5); */
+}
+
+.form__container {
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .grid {
@@ -365,25 +370,11 @@ body.dark-theme {
     margin-bottom: var(--mb-0-5);
 }
 
-/*=============== APP ===============*/
-/* .app__container {
-    gap: 2.5rem;
+/*=============== More post ===============*/
+.more__post {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #dedede;
 }
-
-.app__data {
-    text-align: center;
-}
-
-.app__description {
-    margin-bottom: var(--mb-1-5);
-}
-
-.app__buttons {
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
-    justify-content: center;
-    gap: 0.5rem;
-} */
 
 /*=============== CONTACT ===============*/
 .contact__container {

@@ -50,12 +50,12 @@
 		</div>
 
 		<div>
-			<a href="{{ url_for('users.user_create_post') }}">
+			<!-- <a href="{{ url_for('users.user_create_post') }}">
 				<i class="bx bxs-edit-alt h2-sm button"></i>
 			</a>
 			<a href="{{ url_for('users.user_logout') }}" class="btn__red-alt">		
 				Logout
-			</a>
+			</a> -->
 		</div>
 	</div>
 
@@ -75,10 +75,10 @@
 
 				<div class="article-metadata pl-1">
 					<a class="h3-sm mr-2 d-block" href="{{ url_for('users.user_profile', username=current_user.username) }}">
-						{{ post.author.username }}
+						{{ post.author.name }}
 					</a>
 					<small>
-						{{ post.date_posted.strftime('%d-%m-%Y') }}
+						{{ post.date_posted.strftime('%d %b, %Y') }}
 					</small>
 				</div>
 			</div>
@@ -91,7 +91,7 @@
 						</h2>
 
 						<p class="article-content">
-							{{ post.content | truncate(200) }}
+							{{ post.content | truncate(200) | safe }}
 						</p>
 					</a>
 				</div>
