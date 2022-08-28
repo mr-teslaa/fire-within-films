@@ -103,7 +103,9 @@
 			
 			<nav class="blog-pagination d-flex justify-content-between" aria-label="Pagination">
 				{% if post.id !=1 %}
-				<a  href="{{ url_for('users.user_post', post_id=post.id-1) }}" class="btn btn-outline-dark rounded-pill">
+				<a  
+					href="{{ url_for('users.user_post', post_id=post.id-1) }}" 
+					class="btn btn-outline-dark rounded-pill">
 					Previouse Post
 				</a>
 				{% else %}
@@ -112,7 +114,9 @@
 				</a>			
 				{% endif %}
 
-				<a  href="{{ url_for('users.user_post', post_id=post.id+1) }}" class="btn btn-warning rounded-pill">
+				<a  
+					href="{{ url_for('users.user_post', post_id=post.id+1) }}" 
+					class="btn btn-warning rounded-pill">
 					Next Post
 				</a>
 			</nav>
@@ -183,7 +187,7 @@
 					<ol class="list-unstyled mb-2">
 						{% for author_post in author_all_post %}
 							<li>
-								<a href="#">
+								<a href="{{ url_for('users.user_post', post_id=author_post.id) }}">
 									<div class="more__post">
 										<p>{{ author_post.title }}</p>
 									</div>

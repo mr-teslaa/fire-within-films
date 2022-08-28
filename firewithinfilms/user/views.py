@@ -395,9 +395,11 @@ def user_inbox():
 def user_post(post_id):
     post = UserPost.query.get_or_404(post_id)
     post_author_details = UserDetails.query.filter_by(user_id=post.author.id)
-    author_all_post = UserPost.query.filter_by(user_id=post.author.id).all()
+    author_all_post = UserPost.query.filter_by(user_id=post.author.id).all().desc()
     print('======= author all post =============')
-    print(author_all_post)
+    for author_post in author_all_post:
+        print(author_post)
+        print(author_post.id) 
     print('====================')
 
     # query suggest blog post with pagination
