@@ -48,7 +48,8 @@ def user_profile(username):
 @user.route('/user/dashboard/', methods=['GET', 'POST'])
 @login_required
 def user_dashboard():
-    posts = UserPost.query.all()
+    # posts = UserPost.query.all()
+    posts = UserPost.query.order_by(UserPost.date_posted.desc()).all()
     user = User.query.filter_by(username=current_user.username).first_or_404()
     reviews = UserReviews.query.filter_by(user_id=user.id)
     details = UserDetails.query.filter_by(user_id=user.id)
@@ -395,7 +396,7 @@ def user_inbox():
 def user_post(post_id):
     post = UserPost.query.get_or_404(post_id)
     post_author_details = UserDetails.query.filter_by(user_id=post.author.id)
-    author_all_post = UserPost.query.filter_by(user_id=post.author.id).all().desc()
+    author_all_post = UserPost.query.filter_by(user_id=post.author.id).order_by(UserPost.date_posted.desc()).paginate(1, 3, False).items
     print('======= author all post =============')
     for author_post in author_all_post:
         print(author_post)
@@ -403,8 +404,14 @@ def user_post(post_id):
     print('====================')
 
     # query suggest blog post with pagination
-    post_query = UserPost.query.paginate(1, 4, False)
+    # post_query = UserPost.query.paginate(1, 4, False)
+    # suggest_post_author = post_query.items
+    post_query = UserPost.query.order_by(UserPost.date_posted.desc()).paginate(1, 4, False)
     suggest_post_author = post_query.items
+
+    # find last post
+    lastPost = UserPost.query.order_by(UserPost.date_posted.desc()).first()
+
     print('======= suggested post author =============')
     print(suggest_post_author)
     for author in suggest_post_author:
@@ -418,11 +425,11 @@ def user_post(post_id):
         print(f'image url is {image_file}')
         print(f'image is {post.image_file}')
 
-        return render_template('user/post.html', title=post.title, post=post, image_file=image_file, image_file_status=image_file_status, post_author_details=post_author_details, author_all_post=author_all_post, suggest_post_author=suggest_post_author)
+        return render_template('user/post.html', title=post.title, post=post, image_file=image_file, image_file_status=image_file_status, post_author_details=post_author_details, author_all_post=author_all_post, suggest_post_author=suggest_post_author, lastPost=lastPost)
     else:
         image_file_status = False
 
-    return render_template('user/post.html', title=post.title, post=post, image_file_status=image_file_status, post_author_details=post_author_details,author_all_post=author_all_post, suggest_post_author=suggest_post_author)
+    return render_template('user/post.html', title=post.title, post=post, image_file_status=image_file_status, post_author_details=post_author_details,author_all_post=author_all_post, suggest_post_author=suggest_post_author, lastPost=lastPost)
 
 #   CREATE POST
 @user.route('/post/create/', methods=['GET', 'POST'])
