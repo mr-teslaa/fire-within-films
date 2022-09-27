@@ -1,9 +1,10 @@
 from datetime import datetime
-from email.policy import default
-from signal import default_int_handler
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from firewithinfilms import db
 from firewithinfilms import login_manager
 from flask_login import UserMixin
+
+from flask import current_app
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -24,12 +25,28 @@ class User(db.Model, UserMixin):
     reviews = db.relationship('UserReviews', backref='reviews', lazy=True)
     posts = db.relationship('UserPost', backref='author', lazy=True)
 
+     #   generating the password reseting roken
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    #  verify the token if the token has exprired or invalid
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+
 #   post table for all
 class UserDetails(db.Model):
     __tablename__ = 'user_details'
     id = db.Column(db.Integer, primary_key=True)
     user_headline = db.Column(db.String(100), default="Your Headline")
     country = db.Column(db.String(100), default='India')
+    location = db.Column(db.String())
     description = db.Column(db.Text, nullable=False, default="Write about yourself")
     primary_lang = db.Column(db.String(100), default='N/A')
     secondary_lang = db.Column(db.String(100), default='N/A')

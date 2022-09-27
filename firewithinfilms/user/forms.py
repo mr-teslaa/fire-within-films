@@ -1,3 +1,4 @@
+from ast import Pass
 from io import StringIO
 from wsgiref.validate import validator
 from flask_wtf import FlaskForm
@@ -113,17 +114,7 @@ class UpdateAccountForm(FlaskForm):
         ]
     )
 
-    password = PasswordField(
-        'Create New Password'
-    )
-    
-    confirm_password = PasswordField(
-        'Re-type New Password',
-        validators = [
-            EqualTo('password')
-        ]
-    )
-    submit = SubmitField('Update')
+    submit = SubmitField('Save')
 
     def validate_username(self, username):
         if username.data != current_user.username:
@@ -149,7 +140,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     primary_lang = SelectField(
         'Primary Language',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Language --' ),
             ('hindi', 'Hindi' ),
             ('english', 'English' ),
             ('bangla', 'Bangla' ),
@@ -162,7 +153,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     secondary_lang = SelectField(
         'Secondary Language',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Language --' ),
             ('hindi', 'Hindi' ),
             ('english', 'English' ),
             ('bangla', 'Bangla' ),
@@ -175,7 +166,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     skill_1 = SelectField(
         'Skill',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Skill --' ),
             ('singing', 'Singing' ),
             ('dancing', 'Dancing' ),
             ('voice artist', 'Voice Artist' ),
@@ -190,7 +181,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     skill_2 = SelectField(
         'Another Skill',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Skill --' ),
             ('singing', 'Singing' ),
             ('dancing', 'Dancing' ),
             ('voice artist', 'Voice Artist' ),
@@ -202,7 +193,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     skill_3 = SelectField(
         'Another Skill',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Skill --' ),
             ('singing', 'Singing' ),
             ('dancing', 'Dancing' ),
             ('voice artist', 'Voice Artist' ),
@@ -214,7 +205,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     skill_4 = SelectField(
         'Another Skill',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Skill --' ),
             ('singing', 'Singing' ),
             ('dancing', 'Dancing' ),
             ('voice artist', 'Voice Artist' ),
@@ -226,7 +217,7 @@ class UpdateAccountDescriptionForm(FlaskForm):
     skill_5 = SelectField(
         'Another Skill',
         choices = [
-            ('N/A', '-- Select Class --' ),
+            ('N/A', '-- Select Skill --' ),
             ('singing', 'Singing' ),
             ('dancing', 'Dancing' ),
             ('voice artist', 'Voice Artist' ),
@@ -271,4 +262,54 @@ class PostForm(FlaskForm):
             FileAllowed(['jpg', 'jpeg', 'png'])
         ]
     )
+
     submit = SubmitField('Post')
+
+
+class UpdatePasswordForm(FlaskForm):
+    currentPassword = PasswordField(
+        'Current Password', 
+        validators=[ DataRequired() ]
+    )
+
+    newPassword = PasswordField(
+        'New Password', 
+        # validators=[ DataRequired() ]
+    )
+
+    confirmnewPassword = PasswordField(
+        'Confirm New Password', 
+        # validators=[ DataRequired() ]
+    )
+
+    submit = SubmitField('Save')
+
+
+#   FORGET PASSWORD FORM
+class ForgetPasswordForm(FlaskForm):
+    email = StringField(
+        'Email',
+        validators = [
+            Email()
+        ]
+    )
+
+    submit = SubmitField('Send Reset Link')
+
+
+#   CHANGE PASSWORD TOKEN
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(
+            'Password',
+            validators=[ DataRequired() ]
+    )
+
+    confirm_password = PasswordField(
+            'Confirm Password',
+            validators = [
+                DataRequired(),
+                EqualTo('password')
+            ]
+    )
+
+    submit = SubmitField('Reset Password')

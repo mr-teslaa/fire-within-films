@@ -48,18 +48,7 @@
 			/>
 			<h2 class="h2-sm">Home</h2>
 		</div>
-
-		<div>
-			<!-- <a href="{{ url_for('users.user_create_post') }}">
-				<i class="bx bxs-edit-alt h2-sm button"></i>
-			</a>
-			<a href="{{ url_for('users.user_logout') }}" class="btn__red-alt">		
-				Logout
-			</a> -->
-		</div>
 	</div>
-
-	<!-- <h1 style="font-size: 2rem">{{ current_user.username }}</h1> -->
 
 	<!-- post list -->
 	{% if posts %}
@@ -73,7 +62,7 @@
 					src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
 				/>
 
-				<div class="article-metadata pl-1">
+				<div class="article-metadata pl-1" style="margin-top: auto; margin-bottom: auto;">
 					<a class="h3-sm mr-2 d-block" href="{{ url_for('users.user_profile', username=current_user.username) }}">
 						{{ post.author.name }}
 					</a>

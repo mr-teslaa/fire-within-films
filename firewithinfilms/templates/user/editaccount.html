@@ -1,183 +1,140 @@
-{% extends 'root.html' %}
+{% extends 'root-dashboard.html' %}
 
 <!-- inject code in HEAD TAG -->
 {% block head %} 
-<link 
-    href="{{ url_for('static', filename='assets/scripts/bootstrap.min.css') }}" 
-    rel="stylesheet"
->
+<link
+	rel="stylesheet"
+	href="{{ url_for('static', filename='assets/scripts/login-signup.css') }}"
+/>
 {% endblock %}
 
 
 <!-- block content -->
 {% block content %}
 
-<div class="container">
+<!--  -->
+{% include 'helpers/_sidenav_dashboard.html' %}
 
-    <div class="container">
-        <div class="d-flex justify-content-between py-4">
-            <div>
+<div class="px-1 pl-75">
+    <form method="POST" action="" enctype="multipart/form-data">
+
+        <div class="container">
+            <div
+                class="header-sm flex flex-j-space-between flex-a-center p-5"
+            >
                 <a
                     href="{{ url_for('users.user_dashboard') }}"
-                    class="d-flex justify-content-around btn btn-warning"
-                    >
+                    class="button button__sm button__second submit__button button__alt flex"
+                >
                     <i class="bx bx-left-arrow-alt h2-sm"></i>
-                    Go Back            
+                    <p>Go Dahsboard</p>
                 </a>
-            </div>
-
-            <div class="img__round-sm mx-1">
-                <div class="dropdown">
-                    <button style="background: transparent; font-size: 1.3rem" class="d-flex align-items-center justify-content-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img
-                            src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}"
-                            alt="{{current_user.name}} - FireWithinFilms"
-                            class="img__round-sm mx-1 me-2"
-                        />
-
-                        {{ current_user.name }}
-                        <span class="ps-1">
-                            <i class='bx bx-chevron-down'></i>
-                        </span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <button class="dropdown-item" type="button">Profile</button>
-                        </li>
-                        <li>
-                            <button class="dropdown-item" type="button">  Settings</button>
-                        </li>
-                        <li>
-                            <button class="dropdown-item text-danger" type="button">
-                                <i class="bx bx-log-out nav__icon"></i>
-                                Logout
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                <span>
+                    {{ form.submit(class="button button__sm submit__button")}}
+                </span>
             </div>
         </div>
-    </div>
 
-    <h1> Edit your profile {{ current_user.name }}</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
-        <div class="bg__primary-alt form__container mb-5">
+        <div class="container bg__primary-alt admin__panel-form-container my-1">
+            <div class="flex flex-j-start flex-a-center p-5">
+                <img
+                    src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}"
+                    alt="{{current_user.name}} - FireWithinFilms"
+                    class="img__round-sm mx-1"
+                />
+                <h2 class="h2-sm">Edit Account</h2>
+            </div>
+
             {{ form.hidden_tag() }}
-            <fieldset>
-                <div class="mb-3">
-                    {{ form.name.label(class="form-label") }}
-                    <!-- name -->
-                    {% if form.name.errors %}
-                    <!-- toggle error -->
-                    {{ form.name(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.name.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <!-- no error -->
-                    {{ form.name(class="form-control ") }}
-                    <!-- end of name -->
-                    {% endif %}
+
+            <!-- NAME -->
+            {{ form.name.label(class="form-label") }}
+        
+            {% if form.name.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.name(
+                        class="login__input login__input-error"
+                    ) }}
                 </div>
 
-
-                <div class="mb-3">
-                    {{ form.username.label(class="form-label") }}
-                    <!-- username -->
-                    {% if form.username.errors %}
-                    <!-- toggle error -->
-                    {{ form.username(class="form-control is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <!-- no error -->
-                    {{ form.username(class="form-control ") }}
-                    <!-- end of username -->
-                    {% endif %}
-                </div>
-
-
-                <div class="mb-3">
-                    {{ form.email.label(class="form-label") }}
-                    <!-- email -->
-                    {% if form.email.errors %}
-                    <!-- toggle error -->
-                    {{ form.email(class="form-control  is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <!-- no error -->
-                    {{ form.email(class="form-control ") }}
-                    <!-- end email -->
-                    {% endif %}
-                </div>
-                
-                
-                <div class="mb-3">
-                    {{ form.password.label(class="form-label") }}
-                    <!-- password -->
-                    {% if form.password.errors %}
-                    <!-- toggle error -->
-                    {{ form.password(class="form-control  is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.password.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <!-- no error -->
-                    {{ form.password(class="form-control ") }}
-                    <!-- end of password -->
-                    {% endif %}
-                </div>
-                
-                
-                <div class="mb-3">
-                    {{ form.confirm_password.label(class="form-label") }}
-                    <!-- confirm username -->
-                    {% if form.confirm_password.errors %}
-                    <!-- toggle error -->
-                    {{ form.confirm_password(class="form-control  is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.confirm_password.errors %}
-                        <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <!-- no error -->
-                    {{ form.confirm_password(class="form-control ") }}
-                    <!-- end of confirm password -->
-                    {% endif %}
-                </div>
-
-                <div class="mb-3">
-                    {{ form.picture.label(class="form-label") }}
-                    {{ form.picture(class="form-control-file") }}
-                    {% if form.picture.errors %}
-                        <div class="invalid-feedback">
-                        {% for error in form.picture.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-            </fieldset>
-            <div>
-                {{ form.submit(class="btn btn-warning") }}
+                {% for error in form.name.errors %}
+                <small class="error__message">
+                    {{ error }}
+                </small>
+                {% endfor %}
             </div>
+            {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">
+                {{ form.name(class="login__input") }}
+            </div>
+            {% endif %}
+        
+    
+            <!-- USERNAME -->
+            {{ form.username.label(class="form-label") }}
+
+            {% if form.username.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.username(class="login__input login__input-error") }}
+                </div>
+                
+                {% for error in form.username.errors %}
+                <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">
+                {{ form.username(class="login__input") }}
+            </div>
+            {% endif %}
+                        
+            <!-- EMAIL -->
+            {{ form.email.label(class="form-label") }}
+
+            {% if form.email.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.email(class="login__input login__input-error") }}
+                </div>
+                
+                {% for error in form.email.errors %}
+                <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">
+                {{ form.email(class="login__input") }}
+            </div>
+            {% endif %}          
+                    
+
+            <!-- PICTURE -->
+            {{ form.picture.label(class="form-label") }}
+
+            {% if form.picture.errors %}
+            <div class="login__box-container login__box-lighter my-5 mb-75">
+                <div class="login__box login__box-error">
+                    {{ form.picture(class="login__input login__input-error") }}
+                </div>
+                
+                {% for error in form.picture.errors %}
+                <small class="error__message">{{ error }}</small>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="login__box login__box-lighter my-5 mb-75">
+                {{ form.picture(class="login__input") }}
+            </div>
+            {% endif %}
+                    
         </div>
+
+        <div style="float: right; margin-top: 1rem">
+            {{ form.submit(class="button button__sm submit__button")}}
+        </div>
+
     </form>
 </div>
-
-{% include 'helpers/_dashboard_footer.html' %}
-
-<!-- finish -->
 {% endblock content %}

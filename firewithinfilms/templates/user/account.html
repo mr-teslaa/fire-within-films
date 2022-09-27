@@ -40,19 +40,31 @@
                 class="button button__sm button__second submit__button button__alt flex"
             >
                 <i class="bx bx-left-arrow-alt h2-sm"></i>
-                <p>Go Back</p>
+                <p>Go Dashboard</p>
             </a>
+            
             <span>
                 <a href="{{ url_for('users.user_edit_account') }}" class="button button__sm submit__button">
                     <i class='bx bx-pencil'></i>
                     Edit Profile
                 </a>
+
+                <a 
+                    href="{{ url_for('users.user_edit_description') }}" 
+                    class="button button__sm submit__button"
+                    style="margin-left: 1rem"    
+                >    
+                    <i class='bx bx-pencil'></i>
+                    Edit Description
+                </a>
             </span>
+
         </div>
     </div>
 
     <!-- main content -->
     <div class="container cards profile__card p-1">
+        {% for detail in details %}
         <!-- profile card -->
         <div class="card">
             <div class="img__container text__center">
@@ -77,14 +89,14 @@
                                 <i class='bx bxs-map mx-5'></i>
                                 From
                             </span>
-                            <b>India</b>
+                            <b>{{ detail.country }}</b>
                         </li>
                         <li class="flex flex-j-space-between pb-5">
                             <span>
                                 <i class='bx bxs-user mx-5'></i>
                                 Member Since
                             </span>
-                            <b>Jan 2022</b>
+                            <b>{{ current_user.join_date.strftime('%b %Y') }}</b>
                         </li>
                     </ul>
 
@@ -102,7 +114,6 @@
 
         <div class="profile__details__container">
             <!-- account details -->
-            {% for detail in details %}
             <div class="card about__profile mt-1">
                 <div class="pb-1">
                     <h3>Description</h3>

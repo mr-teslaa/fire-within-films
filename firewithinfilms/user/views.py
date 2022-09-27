@@ -22,6 +22,9 @@ from firewithinfilms.user.forms import LoginForm
 from firewithinfilms.user.forms import UpdateAccountForm
 from firewithinfilms.user.forms import UpdateAccountDescriptionForm
 from firewithinfilms.user.forms import PostForm
+from firewithinfilms.user.forms import UpdatePasswordForm
+from firewithinfilms.user.forms import ForgetPasswordForm
+from firewithinfilms.user.forms import ResetPasswordForm
 
 from firewithinfilms.models import User
 from firewithinfilms.models import UserPost
@@ -33,16 +36,24 @@ from flask_login import current_user
 from flask_login import logout_user
 from flask_login import login_required
 
-from firewithinfilms.save_image import save_post_picture
-from firewithinfilms.save_image import save_profile_picture
+from firewithinfilms.utils.location import getLocation
+
+from firewithinfilms.utils.save_image import save_post_picture
+from firewithinfilms.utils.save_image import save_profile_picture
+from firewithinfilms.utils.send_email import send_reset_email
 
 
 user = Blueprint('users', __name__)
 
+# production=True
+production=False
+
 # USER PUBLIC PROFLE
 @user.route('/<string:username>/')
 def user_profile(username):
-    return f"This page is underconstraction, but the username is {username}"
+    user = User.query.filter_by(username=username).first_or_404()
+    details = UserDetails.query.filter_by(user_id=user.id)
+    return render_template('public/publicaccount.html', user=user, details=details)
 
 #   DASHBOARD FOR USER
 @user.route('/user/dashboard/', methods=['GET', 'POST'])
@@ -55,7 +66,20 @@ def user_dashboard():
     details = UserDetails.query.filter_by(user_id=user.id)
     completed_account_descreption=False
     complete_account=False
+
+    #   UPDATING COUNTRY
+    if production is True:
+        ip_request = request.remote_addr
+    else:
+        ip_request = '17.249.252.255'
+
+    location = getLocation(ip_request)
+
     for detail in details:
+        #   STORE LOCATION IN DATABASE
+        detail.location = location[0]
+        detail.country = location[1] 
+
         if detail.user_headline == 'N/A': 
             completed_account_descreption=False
             print('User headline is NA')
@@ -146,6 +170,8 @@ def user_dashboard():
         else:
             print('name is something')
             complete_account=True
+
+    db.session.commit()
 
     return render_template('user/dashboard.html', posts=posts, completed_account_descreption=completed_account_descreption, 
                         complete_account=complete_account)
@@ -388,7 +414,7 @@ def user_edit_description():
 @user.route('/user/inbox/', methods=['GET', 'POST'])
 @login_required
 def user_inbox():
-    return "Sorry for your inconvinience, but this page is under constraction"
+    return render_template('user/inbox.html', title="Inbox")
 
     
 #   VIEW INDIVIDUAL POST IN A SINGLE PAGE
@@ -532,3 +558,58 @@ def user_login():
 def user_logout():
     logout_user()
     return redirect(url_for('users.user_login'))
+
+
+#   RESET PASSWORD FOR USER
+@user.route('/user/resetpassword/', methods=['GET', 'POST'])
+@login_required
+def user_resetpassword():
+    form = UpdatePasswordForm()
+    if form.validate_on_submit():
+        newpass = form.newPassword.data
+        confirmpass = form.confirmnewPassword.data
+        currentpass_hash = bcrypt.check_password_hash(current_user.password, form.currentPassword.data)
+        if currentpass_hash and newpass==confirmpass:
+            hashed_password = bcrypt.generate_password_hash(newpass).decode('utf-8')
+            current_user.password = hashed_password
+            db.session.commit()
+            flash('Your password has been updated!', 'success')
+            return redirect(url_for('users.user_dashboard'))
+        else:
+            flash('Password Not Matched', 'danger')
+            return redirect(url_for('users.user_resetpassword'))
+
+    return render_template('user/change_password.html', title='Change Password', form=form)
+
+
+@user.route('/password/recover/', methods=['GET', 'POST'])
+def forgetpassword():
+    form = ForgetPasswordForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('users.user_dashboard'))
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('If you have an account with this email, an email has been sent with instructions to reset your password.', 'info')
+        return redirect(url_for('users.user_login'))
+
+    return render_template('user/forgetpassword.html', title='Reset Password', form=form)
+
+
+#   PASSWORD RESET TOKEN
+@user.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard.index'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('users.reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Your password has been updated! You are now able to log in', 'success')
+        return redirect(url_for('users.user_login'))
+    return render_template('user/reset_token.html', title='Reset Password', form=form)

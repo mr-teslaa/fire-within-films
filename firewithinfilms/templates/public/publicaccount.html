@@ -1,0 +1,288 @@
+{% extends 'root-profile.html' %}
+
+{% block content %}
+<header>
+	<nav class="container">
+        <div style="height: 5rem;" class="flex flex-j-space-between flex-a-center">
+            <a href="{{ url_for('public.index') }}" style="font-size: 1.25rem; color: #000;">FireWithinFilms</a>
+
+            <a href="{{ url_for('users.user_login') }}" style="font-size: 1rem; padding: 6px 12px; background-color: #ffc107; color: #000; border-radius: 50rem;">
+                Login
+            </a>
+        </div>
+    </nav>
+</header>
+
+<!-- main content -->
+<div class="container cards profile__card p-1" style="margin-left: 0 !important;">
+    <!-- profile card -->
+    <div class="card">
+        <div class="img__container text__center">
+            <img 
+                class="img__round-lg"
+                src="{{url_for('static', filename='profile_pics/' + user.image_file)}}" 
+            />
+        </div>
+        <div class="text__center">
+            <div class="article-metadata pl-1">
+                <a class="text__name mr-2 d-block" href="#">{{ user.name }}</a>
+                <small class="h3-sm d-block">@{{ user.username }}</small>
+                <h4 class="mt-75 mb-75">
+                    Professional Voice Artist
+                </h4>
+            </div>
+
+            <div class="profile__details text__init">
+                <ul>
+                    <li class="flex flex-j-space-between pb-5">
+                        <span>
+                            <i class='bx bxs-map mx-5'></i>
+                            From
+                        </span>
+                        <b>India</b>
+                    </li>
+                    <li class="flex flex-j-space-between pb-5">
+                        <span>
+                            <i class='bx bxs-user mx-5'></i>
+                            Member Since
+                        </span>
+                        <b>Jan 2022</b>
+                    </li>
+                </ul>
+
+                <a href="{{ url_for('users.user_inbox') }}">  
+                    <input 
+                        type="button" 
+                        value="Contact me" 
+                        class="button__second btn-no-border"
+                        style="cursor: pointer;"
+                    />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile__details__container">
+        <!-- account details -->
+        {% for detail in details %}
+        <div class="card about__profile mt-1">
+            <div class="pb-1">
+                <h3>Description</h3>
+                <article class="text__normal">
+                    <!-- Jessica Moore is a vocalist and arranger specialising in pop, rock and musical theatre. She is versatile and can adapt her style to any genre. She studied at one of London's top music universities where she graduated with First Class Honours and the 'Best Vocalist' award. Jessica writes her own vocal arrangements, and enjoys re-working known pop and rock songs into a cappella versions. She has toplined for a variety of dance, pop and rock artists and has held lead roles in musicals. She can also provide voice acting, due to her experience in theatre and performance. -->
+                    {{ detail.description }}
+                </article>
+            </div>
+
+            <div class="mt-1 pb-1">
+                <h3 class="mb-5">Language</h3>
+                {% if detail.primary_lang=='None' and detail.secondary_lang=='None' or detail.primary_lang.lower()=='n/a' and detail.secondary_lang.lower()=='n/a' %}
+                <p>
+                    No language added. 
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add Language
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                </p>
+                {% else %}
+                    {% if detail.primary_lang != 'None' and detail.secondary_lang != 'None' or detail.primary_lang != 'N/A' and detail.secondary_lang != 'N/A' %}
+                    <span class="skill text__normal">
+                        {{ detail.primary_lang.capitalize() }}
+                    </span>
+                    <span class="skill text__normal">
+                        {{ detail.secondary_lang.capitalize() }}
+                    </span>
+                    {% elif detail.primary_lang != 'None' or detail.primary_lang != 'N/A' %}
+                    <span class="skill text__normal">
+                        {{ detail.primary_lang.capitalize() }}
+                    </span>
+
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add Language
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                    {% else %}
+                    <span class="skill text__normal">
+                        {{ detail.secondary_lang }}
+                    </span>
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add Language
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                    {% endif %}
+
+                {% endif %}
+            </div>
+
+            <div class="mt-1 pb-1">
+                <h3 class="mb-5">Skills</h3>
+
+                {% if detail.skill_1=='None' and detail.skill_2=='None' and detail.skill_3=='None' and detail.skill_4 and detail.skill_5=='None' or detail.skill_1=='N/A' and detail.skill_2=='N/A' and detail.skill_3=='N/A' and detail.skill_4=='N/A' and detail.skill_5=='N/A' %}
+                <p>
+                    No skill added. 
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add skills
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                </p>
+                {% else %}
+                <p class="text-1">
+                    {% if detail.skill_1 != 'None' or detail.skill_1 != 'N/A' %}
+                    <span class="skill text__normal">{{ detail.skill_1.capitalize() }}</span>
+                    {% endif %}
+
+                    {% if detail.skill_2 != 'None' or detail.skill_2 != 'N/A' %}
+                    <span class="skill text__normal">{{ detail.skill_2.capitalize() }}</span>
+                    {% endif %}
+
+                    {% if detail.skill_3 == 'None' or detail.skill_3 != 'N/A' %}
+                    <span class="skill text__normal">{{ detail.skill_3.capitalize() }}</span>
+                    {% endif %}
+
+                    {% if detail.skill_4 == 'None' or detail.skill_4 != 'N/A' %}
+                    <span class="skill text__normal">{{ detail.skill_4.capitalize() }}</span>
+                    {% endif %}
+
+                    {% if detail.skill_5 == 'None' or detail.skill_5 != 'N/A' %}
+                    <span class="skill text__normal">{{ detail.skill_5.capitalize() }}</span>
+                    {% endif %}
+
+                    {% if detail.skill_1 == 'None' and detail.skill_2 == 'None' and detail.skill_3 == 'None' and detail.skill_4 == 'None' and detail.skill_5 == 'None' or detail.skill_1 == 'N/A' and detail.skill_2 == 'N/A' and detail.skill_3 == 'N/A' and detail.skill_4 == 'N/A' and detail.skill_5 == 'N/A' %}
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add skills here
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                    {% endif %}
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="mt-1 pb-1 last">
+                <h3 class="mb-5">Education</h3>
+                {% if detail.education_graduation_name=='N/A' or detail.education_institue_name=='N/A' %}
+                <p>
+                    No education added. 
+                    <a href="{{ url_for('users.user_edit_description') }}" class="skill text__normal">
+                        Add Education
+                        <i class='bx bx-plus' style="margin-right: 5px;"></i>
+                    </a>
+                </p>
+                {% else %}
+                <p class="text__normal">
+                    {{ detail.education_graduation_name.upper() }} - {{ detail.education_institue_name.capitalize() }}
+                    <span class="d-block text__muted">
+                        {{ detail.education_institue_country.capitalize() }}, 
+                        {% if detail.education_graduation_year != '0' %}
+                            Graduated {{ detail.education_graduation_year }}
+                        {% else %}
+                            Currently Studying 
+                        {% endif %}
+                    </span>
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- <div class="mt-1 last">
+                <h3 class="mb-5">Language</h3>
+                <p class="text__normal">
+                    BMus Popular Music Performance - First Class Honours
+                    <span class="d-block text__muted">
+                        UEL & ICMP 2018
+                    </span>
+                </p>
+            </div> -->
+        </div>
+        {% endfor %}
+
+        <!-- ratings -->
+        <div class="card mt-1">
+            <h3 class="mb-5">
+                Reviews 
+                <small>
+                    (Avg <span class="review__star">{{ avg_review }}</span>
+                    <i class='bx bxs-star review__star'></i>)
+                </small>
+            </h3>
+
+            <h3>
+                <span class="review__star__container d-block">
+                    <span class="review__star">5</span>
+                    ({{review_5}}) - 
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                </span>
+                <span class="review__star__container d-block">
+                    <span class="review__star">4</span>
+                    ({{review_4}}) - 
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                </span>
+                <span class="review__star__container d-block">
+                    <span class="review__star">3</span>
+                    ({{review_3}}) -  
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                </span>
+                <span class="review__star__container d-block">
+                    <span class="review__star">2</span>
+                    ({{review_2}}) -  
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                </span>
+                <span class="review__star__container d-block">
+                    <span class="review__star">1</span>
+                    ({{review_1}}) - 
+                    <i class='bx bxs-star review__star'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                    <i class='bx bxs-star text__muted'></i>
+                </span>
+            </h3>
+        </div>
+    </div>
+</div>
+
+<!-- =========== FOOTER ============= -->
+<footer style="margin: 2rem auto;">
+    <div class="container">
+        <div style="text-align: center">
+            <h2>FireWithinFilms</h2>
+            <p> Unleash your inner power </p>
+
+            <small class="flex flex-j-content-center" style="gap: 2rem; margin-top: 2rem;">
+                <a href="#" class="link pe-4"> 
+                    Privacy Policy </a>
+                <a href="#" class="link pe-4"> Terms of service </a>
+                <a href="#" class="link"> Help and support </a>
+            </small>
+            
+            <div class="">
+                <p class="footer__copy" style="margin-top: 2rem !important;">
+                    &copy; <span id="yearvalue">20xx</span> FireWithinFilms. Developed by
+                    <a href="https://hossainfoysal.com" style="color: #00a8ff"> Hossain Foysal </a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const year = new Date();
+        const gettheyear = year.getFullYear();
+        const yearel = document.querySelector("#yearvalue");
+        yearel.innerHTML = gettheyear;
+    </script>
+</footer>
+{% endblock content %}
