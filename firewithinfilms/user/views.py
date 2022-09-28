@@ -45,8 +45,8 @@ from firewithinfilms.utils.send_email import send_reset_email
 
 user = Blueprint('users', __name__)
 
-# production=True
-production=False
+production=True
+# production=False
 
 # USER PUBLIC PROFLE
 @user.route('/<string:username>/')
