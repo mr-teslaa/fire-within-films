@@ -11,9 +11,12 @@ class Config:
     SECRET_KEY = '5791628bb0b13ce0c676dfde280ba245'
 
     if production:
-        SQLALCHEMY_DATABASE_URI = 'mysql://root:@127.0.0.1/firewithinflims'
+        SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI_PRODUCTION')
+        print(SQLALCHEMY_DATABASE_URI)
+        SQLALCHEMY_TRACK_MODIFICATIONS=True
     else:
         SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+        SQLALCHEMY_TRACK_MODIFICATIONS=True
         
     # set optional bootswatch theme
     FLASK_ADMIN_SWATCH = 'cerulean'
