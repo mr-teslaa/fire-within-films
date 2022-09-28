@@ -24,8 +24,9 @@ Jinja2==3.0.1
 Mako==1.2.0
 MarkupSafe==2.0.1
 mysqlclient==2.1.0
-Pillow==9.0
+Pillow==9.0.0
 pycparser==2.20
+python-dotenv==0.20.0
 requests==2.27.1
 six==1.16.0
 SQLAlchemy==1.4.23
