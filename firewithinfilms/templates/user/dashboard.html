@@ -63,7 +63,7 @@
 				/>
 
 				<div class="article-metadata pl-1" style="margin-top: auto; margin-bottom: auto;">
-					<a class="h3-sm mr-2 d-block" href="{{ url_for('users.user_profile', username=current_user.username) }}">
+					<a class="h3-sm mr-2 d-block" href="{{ url_for('users.user_profile', username=post.author.username) }}">
 						{{ post.author.name }}
 					</a>
 					<small>

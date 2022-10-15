@@ -53,7 +53,8 @@ production=True
 def user_profile(username):
     user = User.query.filter_by(username=username).first_or_404()
     details = UserDetails.query.filter_by(user_id=user.id)
-    return render_template('public/publicaccount.html', user=user, details=details)
+    posts = UserPost.query.filter_by(author=user).order_by(UserPost.date_posted.desc()).all()
+    return render_template('public/publicaccount.html', user=user, details=details, posts=posts)
 
 #   DASHBOARD FOR USER
 @user.route('/user/dashboard/', methods=['GET', 'POST'])
@@ -423,11 +424,6 @@ def user_post(post_id):
     post = UserPost.query.get_or_404(post_id)
     post_author_details = UserDetails.query.filter_by(user_id=post.author.id)
     author_all_post = UserPost.query.filter_by(user_id=post.author.id).order_by(UserPost.date_posted.desc()).paginate(1, 3, False).items
-    print('======= author all post =============')
-    for author_post in author_all_post:
-        print(author_post)
-        print(author_post.id) 
-    print('====================')
 
     # query suggest blog post with pagination
     # post_query = UserPost.query.paginate(1, 4, False)
@@ -438,18 +434,9 @@ def user_post(post_id):
     # find last post
     lastPost = UserPost.query.order_by(UserPost.date_posted.desc()).first()
 
-    print('======= suggested post author =============')
-    print(suggest_post_author)
-    for author in suggest_post_author:
-        print(author.author.name)
-    print('====================')
-    
-
     if post.image_file:
         image_file = url_for('static', filename='pictures/' + post.image_file)
         image_file_status = True
-        print(f'image url is {image_file}')
-        print(f'image is {post.image_file}')
 
         return render_template('user/post.html', title=post.title, post=post, image_file=image_file, image_file_status=image_file_status, post_author_details=post_author_details, author_all_post=author_all_post, suggest_post_author=suggest_post_author, lastPost=lastPost)
     else:

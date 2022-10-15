@@ -29,10 +29,41 @@
 
 			<article class="blog-post">
 				<h1 class="blog-post-title mb-1"> {{ post.title }}  </h1>
-				<p class="blog-post-meta">
-					{{ post.date_posted.strftime('%d %b, %Y') }} by
-					<a href="#">{{ post.author.name }}</a>
-				</p>
+				<div class="d-flex justify-content-between">
+					<p class="blog-post-meta">
+						{{ post.date_posted.strftime('%d %b, %Y') }} by
+						<a href="#">{{ post.author.name }}</a>
+					</p>
+
+					{% if post.author == current_user %}
+					<div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+						<button class="btn btn-dark">
+							<a href="{{ url_for('users.user_update_post', post_id=post.id) }}" class="text-white">
+								Update
+							</a>
+						</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+					</div>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="staticBackdropLabel">Delete this pos</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-sm btn-outline-dark" data-bs-dismiss="modal">Close</button>
+									<form action="{{ url_for('users.user_delete_post', post_id=post.id) }}" method="POST">
+										<input type="submit" class="btn btn-sm btn-dark m-1" value="Confirm" />
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
 
 				<p> {{ post.content | safe }} </p>
 				<hr>
@@ -84,7 +115,7 @@
 							
 							<div class="pb-2">
 								<p class="mb-1 ">{{ suggest_post.title }}</p>
-								<small class="text-muted">By <a href="#" class="text-muted" style="text-decoration: underline;">{{ suggest_post.author.name }}</a></small>
+								<small class="text-muted">By <a href="{{ url_for('users.user_profile', username=suggest_post.author.username) }}" class="text-muted" style="text-decoration: underline;">{{ suggest_post.author.name }}</a></small>
 							</div>
 						</div>
 					</a>
@@ -127,10 +158,6 @@
 				</div>
 
 				<div class="p-4">
-					<h5 class="text-dark mb-3">More from 
-						<span class="text-warning"> {{ post.author.name }}</span> 
-					</h5>
-
 					<ol class="list-unstyled mb-2">
 						{% for author_post in author_all_post %}
 						{% if post != author_post %}
